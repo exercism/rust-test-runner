@@ -17,9 +17,9 @@ RUN cargo build --release
 
 # As of Aug 2019, we need to use the nightly toolchain to get JSON test output
 FROM rustlang/rust:nightly AS test
-ENV wd /opt/test-runner/bin
-RUN mkdir -p ${wd}
+ENV wd /opt/test-runner
+RUN mkdir -p ${wd}/bin
 WORKDIR ${wd}
-COPY --from=build /rust-test-runner/target/release/transform-output .
-COPY run.sh .
-ENTRYPOINT ["./run.sh"]
+COPY --from=build /rust-test-runner/target/release/transform-output bin
+COPY bin/run.sh bin
+ENTRYPOINT ["bin/run.sh"]
