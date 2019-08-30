@@ -14,5 +14,9 @@ if [ -z "$slug" ] || [ -z "$solution_path" ]; then
 fi
 
 cd "$solution_path"
-cargo +nightly test -- -Z unstable-options --format json |\
-    /opt/test-runner/bin/transform-output
+RUST_TEST_TASKS=1 \
+    cargo +nightly test -- \
+    -Z unstable-options \
+    --format json |\
+        /opt/test-runner/bin/transform-output \
+        > "$solution_path"/report.json
