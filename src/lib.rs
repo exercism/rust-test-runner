@@ -1,22 +1,21 @@
 use serde::{Deserialize, Serialize};
-use strum_macros::{Display, EnumString};
 
-#[derive(Debug, PartialEq, Eq, Display, EnumString, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum EventType {
-    #[strum(serialize = "test", to_string = "test")]
     Test,
-    #[strum(serialize = "suite", to_string = "suite")]
     Suite,
 }
-#[derive(Debug, PartialEq, Eq, Display, EnumString, Serialize, Deserialize)]
+
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Event {
-    #[strum(serialize = "started", to_string = "started")]
     Started,
-    #[strum(serialize = "ok", to_string = "ok")]
     Ok,
+    Ignored,
 }
 
-#[derive(Debug, PartialEq, Eq,  Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TestEvent {
     pub etype: EventType,
     pub event: Event,
@@ -31,12 +30,38 @@ pub struct TestEvent {
 
 #[cfg(test)]
 mod test {
+    use super::*;
+
     #[test]
     fn pass() {}
 
     #[test]
-    #[should_panic]
+    #[ignore]
     fn fail() {
         assert!(false);
+    }
+
+    const TEST_DATA: &'static str = r#"
+{ "type": "suite", "event": "started", "test_count": 2 }
+{ "type": "test", "event": "started", "name": "test::fail" }
+{ "type": "test", "event": "started", "name": "test::pass" }
+{ "type": "test", "name": "test::pass", "event": "ok" }
+{ "type": "test", "name": "test::fail", "event": "ok" }
+{ "type": "suite", "event": "ok", "passed": 2, "failed": 0, "allowed_fail": 0, "ignored": 0, "measured": 0, "filtered_out": 0 }
+{ "type": "suite", "event": "started", "test_count": 0 }
+{ "type": "suite", "event": "ok", "passed": 0, "failed": 0, "allowed_fail": 0, "ignored": 0, "measured": 0, "filtered_out": 0 }
+{ "type": "suite", "event": "started", "test_count": 0 }
+{ "type": "suite", "event": "ok", "passed": 0, "failed": 0, "allowed_fail": 0, "ignored": 0, "measured": 0, "filtered_out": 0 }
+    "#;
+
+    #[test]
+    fn test_parse_events() {
+        // there are 10 events in the data set; all must parse
+        assert_eq!(
+            serde_json::Deserializer::from_str(TEST_DATA)
+                .into_iter::<TestEvent>()
+                .count(),
+            10
+        );
     }
 }
