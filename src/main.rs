@@ -1,18 +1,13 @@
-use std::io::{BufRead, Write};
+use transform_output::cargo_test::TestEvent;
+use transform_output::convert;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let stdin = std::io::stdin();
-    let mut stdin_lock = stdin.lock();
-    let stdout = std::io::stdout();
-    let mut stdout_lock = stdout.lock();
 
-    let mut line_buf = String::with_capacity(255);
-    while let Ok(n) = stdin_lock.read_line(&mut line_buf) {
-        if n == 0 {
-            break;
-        }
-        write!(stdout_lock, "{}", line_buf)?;
-        line_buf.clear();
-    }
+    let out = convert(serde_json::Deserializer::from_reader(stdin.lock()).into_iter::<TestEvent>());
+
+    let stdout = std::io::stdout();
+    serde_json::to_writer_pretty(stdout.lock(), &out)?;
+
     Ok(())
 }

@@ -14,9 +14,11 @@ if [ -z "$slug" ] || [ -z "$solution_path" ]; then
 fi
 
 cd "$solution_path"
+RUST_BACKTRACE=1 \
 RUST_TEST_TASKS=1 \
     cargo +nightly test -- \
     -Z unstable-options \
+    --include-ignored \
     --format json |\
         /opt/test-runner/bin/transform-output \
         > "$solution_path"/report.json
