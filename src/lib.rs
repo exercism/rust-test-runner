@@ -11,7 +11,7 @@ where
     E: serde::de::Error + std::fmt::Display,
 {
     let mut out = o::Output {
-        status: o::Status::Pass,
+        status: o::Status::Error("no tests detected; probable build failure".into()),
         tests: Vec::new(),
     };
     for (idx, event) in events.enumerate() {
@@ -34,7 +34,10 @@ where
         };
         match event.event {
             ct::Event::Started => continue,
-            ct::Event::Ok => out.tests.push(o::TestResult::ok(name)),
+            ct::Event::Ok => {
+                out.status = o::Status::Pass;
+                out.tests.push(o::TestResult::ok(name));
+            }
             ct::Event::Failed => {
                 out.status = o::Status::Fail;
                 out.tests.push(o::TestResult::fail(name, event.stdout));
