@@ -11,14 +11,16 @@ where
     E: serde::de::Error + std::fmt::Display,
 {
     let mut out = o::Output {
-        status: o::Status::Error("no tests detected; probable build failure".into()),
+        status: o::Status::Error,
+        message: Some("no tests detected; probable build failure".into()),
         tests: Vec::new(),
     };
     for (idx, event) in events.enumerate() {
         let event = match event {
             Ok(e) => e,
             Err(e) => {
-                out.status = o::Status::Error(format!("test event misparse at idx {}: {}", idx, e));
+                out.status = o::Status::Error;
+                out.message = Some(format!("test event misparse at idx {}: {}", idx, e));
                 break;
             }
         };
@@ -28,7 +30,8 @@ where
         let name = match event.name {
             Some(n) => n,
             None => {
-                out.status = o::Status::Error("a test event had no name".into());
+                out.status = o::Status::Error;
+                out.message = Some("a test event had no name".into());
                 break;
             }
         };
@@ -36,15 +39,18 @@ where
             ct::Event::Started => continue,
             ct::Event::Ok => {
                 out.status = o::Status::Pass;
+                out.message = None;
                 out.tests.push(o::TestResult::ok(name));
             }
             ct::Event::Failed => {
                 out.status = o::Status::Fail;
+                out.message = None;
                 out.tests.push(o::TestResult::fail(name, event.stdout));
                 break;
             }
             ct::Event::Ignored => {
-                out.status = o::Status::Error(format!("test {} was ignored", name));
+                out.status = o::Status::Error;
+                out.message = Some(format!("test {} was ignored", name));
                 break;
             }
         }

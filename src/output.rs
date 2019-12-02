@@ -4,9 +4,8 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "snake_case")]
 pub enum Status {
     Pass,
-    CorePass,
     Fail,
-    Error(String),
+    Error,
 }
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -37,5 +36,6 @@ impl TestResult {
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Output {
     pub status: Status,
+    pub message: Option<String>,
     pub tests: Vec<TestResult>,
 }

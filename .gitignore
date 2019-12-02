@@ -1,4 +1,6 @@
 /target
 **/*.rs.bk
 /report.json
+/results.json
+/results.out
 /.vscode/
