@@ -2,6 +2,10 @@
 
 set -e
 
+export RUSTUP_HOME=/usr/local/rustup
+export CARGO_HOME=/usr/local/cargo
+export PATH=/usr/local/cargo/bin:$PATH
+
 slug="$1"
 solution_path="$2"
 output_path="$3"
