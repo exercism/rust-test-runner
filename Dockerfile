@@ -1,4 +1,5 @@
-FROM rust:1.40.0 as build
+# always build this using the latest stable release
+FROM rust:latest as build
 
 RUN mkdir -p /rust-test-runner/src
 WORKDIR /rust-test-runner
@@ -15,8 +16,7 @@ COPY src/* src/
 RUN cargo build --release
 
 # As of Dec 2019, we need to use the nightly toolchain to get JSON test output
-# FROM rustlang/rust:nightly AS test
-FROM rustlang/rust:b4f4f4589b1108f38f83a91e009761a182bdb4e4f12f03e508352f5fb9154910
+FROM rustlang/rust:nightly AS test
 ENV wd /opt/test-runner
 RUN mkdir -p ${wd}/bin
 WORKDIR ${wd}
