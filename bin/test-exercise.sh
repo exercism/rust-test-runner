@@ -8,6 +8,9 @@ if [ -z "$exercise_path" ]; then
     exit 1
 fi
 
+# bust the cache
+touch "$exercise_path/src/lib.rs"
+
 exercise_name="$(basename "$exercise_path")"
 
 internal_mountpoint="/mnt/exercism-iteration"
@@ -18,5 +21,5 @@ docker run \
     --volume "$exercise_path:$internal_mountpoint" \
     rtr "$exercise_name" "$internal_mountpoint"
 
-mv "$exercise_path/report.json" .
-jq . report.json
+mv "$exercise_path"/results.* .
+jq . results.json
