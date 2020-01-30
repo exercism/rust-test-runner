@@ -31,14 +31,17 @@ where
             Some(n) => n,
             None => {
                 out.status = o::Status::Error;
-                out.message = Some("a test event had no name".into());
+                out.message = Some(format!("a test event had no name at idx {}", idx));
                 break;
             }
         };
         match event.event {
             ct::Event::Started => continue,
             ct::Event::Ok => {
-                out.status = o::Status::Pass;
+                // don't override failures with subsequent successes
+                if out.status == o::Status::Error {
+                    out.status = o::Status::Pass;
+                }
                 out.message = None;
                 out.tests.push(o::TestResult::ok(name));
             }
@@ -46,7 +49,6 @@ where
                 out.status = o::Status::Fail;
                 out.message = None;
                 out.tests.push(o::TestResult::fail(name, event.stdout));
-                break;
             }
             ct::Event::Ignored => {
                 out.status = o::Status::Error;
