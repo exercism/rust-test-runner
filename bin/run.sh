@@ -37,9 +37,7 @@ else
     echo "WARNING: student did not upload Cargo.lock. This may cause build errors." | tee -a "$output_path/results.out"
 fi
 
-RUST_BACKTRACE=1 \
-RUST_TEST_TASKS=1 \
-    cargo +nightly test \
+cargo +nightly test \
     --offline \
     -- \
     -Z unstable-options \
