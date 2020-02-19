@@ -5,14 +5,14 @@ use cargo_test as ct;
 use output as o;
 
 /// convert a stream of test events into a single test result
-pub fn convert<I, E>(events: I) -> o::Output
+pub fn convert<I, E>(events: I, stderr: String) -> o::Output
 where
     I: Iterator<Item = Result<ct::TestEvent, E>>,
     E: serde::de::Error + std::fmt::Display,
 {
     let mut out = o::Output {
         status: o::Status::Error,
-        message: Some("no tests detected; probable build failure".into()),
+        message: Some(stderr),
         tests: Vec::new(),
     };
     for (idx, event) in events.enumerate() {

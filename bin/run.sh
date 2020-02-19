@@ -37,6 +37,7 @@ else
     echo "WARNING: student did not upload Cargo.lock. This may cause build errors." | tee -a "$output_path/results.out"
 fi
 
+set +e
 cargo +nightly test \
     --offline \
     -- \
@@ -44,7 +45,8 @@ cargo +nightly test \
     --include-ignored \
     --format json \
     2> >(tee -a "$output_path"/results.out >&2) \
-    |\
-        /opt/test-runner/bin/transform-output \
+    > "$output_path"/results.cargo
+
+/opt/test-runner/bin/transform-output "$output_path"/results.cargo "$output_path"/results.out \
         > "$output_path"/results.json
 
