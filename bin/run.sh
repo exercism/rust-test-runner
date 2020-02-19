@@ -48,3 +48,15 @@ cargo +nightly test \
         /opt/test-runner/bin/transform-output \
         > "$output_path"/results.json
 
+if grep -q "probable build failure" "$output_path"/results.json; then
+   # escape double quotes in message
+   sed -i 's/"/\\"/g' "$output_path"/results.out
+   # build json with message
+   echo '{"status": "error", "message":"' > "$output_path"/results.json
+   cat "$output_path"/results.out >> "$output_path"/results.json
+   echo '"}' >> "$output_path"/results.json
+   # Replace line endings with \n string
+   # https://stackoverflow.com/questions/38672680/replace-newlines-with-literal-n/38674872
+   sed -i -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' "$output_path"/results.json
+   echo "Finished with error"
+fi
