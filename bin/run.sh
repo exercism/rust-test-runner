@@ -48,3 +48,6 @@ cargo +nightly test \
         /opt/test-runner/bin/transform-output \
         > "$output_path"/results.json
 
+if grep -q "probable build failure" "$output_path"/results.json; then
+   /opt/test-runner/bin/jq -n --rawfile m "$output_path"/results.out '{status: "error", message:$m}' > "$output_path"/results.json
+fi

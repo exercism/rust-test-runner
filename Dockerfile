@@ -20,6 +20,9 @@ FROM rustlang/rust:nightly AS test
 ENV wd /opt/test-runner
 RUN mkdir -p ${wd}/bin
 WORKDIR ${wd}
+# download jq
+RUN curl -L -o bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 \
+  && chmod +x bin/jq
 COPY --from=build /rust-test-runner/target/release/transform-output bin
 COPY bin/run.sh bin
 ENTRYPOINT ["bin/run.sh"]
