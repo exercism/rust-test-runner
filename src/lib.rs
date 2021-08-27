@@ -11,6 +11,7 @@ where
     E: serde::de::Error + std::fmt::Display,
 {
     let mut out = o::Output {
+        version: 2,
         status: o::Status::Error,
         message: Some("no tests detected; probable build failure".into()),
         tests: Vec::new(),

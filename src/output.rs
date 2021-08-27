@@ -35,6 +35,7 @@ impl TestResult {
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Output {
+    pub version: u8,
     pub status: Status,
     pub message: Option<String>,
     pub tests: Vec<TestResult>,
