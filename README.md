@@ -4,8 +4,8 @@ Run unit tests for the Rust track of Exercism.
 
 See:
 
-- [`docker.md`](https://github.com/exercism/automated-tests/blob/master/docs/docker.md)
-- [`interface.md`](https://github.com/exercism/automated-tests/blob/master/docs/interface.md)
+- [`docker.md`](https://exercism.org/docs/building/tooling/test-runners/docker)
+- [`interface.md`](https://exercism.org/docs/building/tooling/test-runners/interface)
 
 ## General Architecture
 
