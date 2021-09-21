@@ -28,12 +28,7 @@ if [ -z "$slug" ] || [ -z "$solution_path" ]; then
 fi
 
 cd "$solution_path"
-if [ -e Cargo.lock ]; then
-    if [ "$(grep -c '\[\[package\]\]' Cargo.lock)" -gt 1 ]; then
-        echo "{\"status\":\"error\",\"message\":\"building $slug: external crates not supported\",\"tests\":[]}" > "$output_path"/results.json
-        exit
-    fi
-else
+if [ ! -e Cargo.lock ]; then
     echo "WARNING: student did not upload Cargo.lock. This may cause build errors." | tee -a "$output_path/results.out"
 fi
 
