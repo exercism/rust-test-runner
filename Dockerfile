@@ -22,7 +22,6 @@ RUN curl -L -o /usr/local/bin/jq https://github.com/stedolan/jq/releases/downloa
 RUN curl -L -o clr.tar.gz https://github.com/ChrisGreenaway/cargo-local-registry/releases/download/0.2.1/cargo-local-registry-0.2.1-x86_64-unknown-linux-musl.tar.gz \
   && tar xvzf clr.tar.gz && chmod +x cargo-local-registry && mv cargo-local-registry /usr/local/cargo/bin
 # download and build popular crates to local registry
-RUN mkdir /local-registry
 WORKDIR /local-registry
 COPY local-registry/* ./
 RUN curl "https://crates.io/api/v1/crates?page=1&per_page=100&sort=downloads" | \
@@ -36,7 +35,7 @@ ENV wd /opt/test-runner
 RUN mkdir -p ${wd}/bin
 WORKDIR ${wd}
 COPY --from=build /rust-test-runner/target/release/transform-output bin
-COPY --from=build /usr/local/bin/jq bin
+COPY --from=build /usr/local/bin/jq /usr/local/bin
 # configure local-registry
 COPY --from=build /local-registry local-registry/
 RUN echo '[source.crates-io]\n\
