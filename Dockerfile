@@ -15,8 +15,7 @@ RUN rm src/lib.rs
 COPY src/* src/
 # build the executable
 RUN cargo build --release
-RUN mkdir -p ${wd}/bin
-COPY bin/generate-registry.sh ${wd}/bin
+COPY bin/generate-registry.sh ${wd}/bin/
 # download jq
 RUN curl -L -o /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 \
   && chmod +x /usr/local/bin/jq
