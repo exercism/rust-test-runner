@@ -19,8 +19,11 @@ COPY bin/generate-registry.sh ${wd}/bin/
 # download jq
 RUN curl -L -o /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 \
   && chmod +x /usr/local/bin/jq
-# build cargo-local-registry
-RUN cargo install --git https://github.com/ChrisGreenaway/cargo-local-registry.git
+# retrieve cargo-local-registry
+RUN curl -L -o clr.tar.gz https://github.com/dhovart/cargo-local-registry/releases/download/0.2.2/cargo-local-registry-0.2.2-x86_64-unknown-linux-musl.tar.gz && \
+  tar xvzf clr.tar.gz --strip-components=1 && \
+  chmod +x cargo-local-registry && \
+  mv cargo-local-registry /usr/local/cargo/bin
 # download popular crates to local registry
 WORKDIR /local-registry
 COPY local-registry/* ./
