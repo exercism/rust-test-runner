@@ -1,6 +1,13 @@
 # always build this using the latest stable release
 FROM rust:latest as build
 
+ARG CLR_NAME=cargo-local-registry
+ARG CLR_VERSION=0.2.2
+ARG CLR_URL=https://github.com/dhovart/${CLR_NAME}/releases/download/${CLR_VERSION}/${CLR_NAME}-${CLR_VERSION}-x86_64-unknown-linux-musl.tar.gz
+
+ARG JQ_VERSION=1.6
+ARG JQ_URL=https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64
+
 RUN mkdir -p /rust-test-runner/src
 ENV wd /rust-test-runner
 WORKDIR ${wd}
@@ -17,13 +24,13 @@ COPY src/* src/
 RUN cargo build --release
 COPY bin/generate-registry.sh ${wd}/bin/
 # download jq
-RUN curl -L -o /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 \
-  && chmod +x /usr/local/bin/jq
+RUN curl -L -o /usr/local/bin/jq "${JQ_URL}" \
+ && chmod +x /usr/local/bin/jq
 # retrieve cargo-local-registry
-RUN curl -L -o clr.tar.gz https://github.com/dhovart/cargo-local-registry/releases/download/0.2.2/cargo-local-registry-0.2.2-x86_64-unknown-linux-musl.tar.gz && \
-  tar xvzf clr.tar.gz --strip-components=1 && \
-  chmod +x cargo-local-registry && \
-  mv cargo-local-registry /usr/local/cargo/bin
+RUN curl -L -o clr.tar.gz "${CLR_URL}" \
+ && tar xvzf clr.tar.gz --strip-components=1 \
+ && chmod +x cargo-local-registry \
+ && mv cargo-local-registry /usr/local/cargo/bin
 # download popular crates to local registry
 WORKDIR /local-registry
 COPY local-registry/* ./
