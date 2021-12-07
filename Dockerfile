@@ -22,7 +22,6 @@ RUN rm src/lib.rs
 COPY src/* src/
 # build the executable
 RUN cargo build --release
-COPY bin/generate-registry.sh ${wd}/bin/
 # download jq
 RUN curl -L -o /usr/local/bin/jq "${JQ_URL}" \
  && chmod +x /usr/local/bin/jq
@@ -34,7 +33,7 @@ RUN curl -L -o clr.tar.gz "${CLR_URL}" \
 # download popular crates to local registry
 WORKDIR /local-registry
 COPY local-registry/* ./
-RUN ${wd}/bin/generate-registry.sh
+RUN cargo generate-lockfile && cargo local-registry --sync Cargo.lock .
 
 # As of Dec 2019, we need to use the nightly toolchain to get JSON test output
 FROM rustlang/rust:nightly AS test
@@ -53,6 +52,4 @@ replace-with = "local-registry"\n\
 local-registry = "/opt/test-runner/local-registry/"\n' >> $CARGO_HOME/config.toml
 # set entrypoint
 COPY bin/run.sh bin
-COPY --from=build /usr/local/cargo/bin/cargo-local-registry /usr/local/cargo/bin/
-COPY bin/generate-registry.sh bin
 ENTRYPOINT ["bin/run.sh"]
