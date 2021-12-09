@@ -1,6 +1,6 @@
-/target
+target/
 **/*.rs.bk
-/report.json
-/results.json
-/results.out
+report.json
+results.json
+results.out
 /.vscode/
