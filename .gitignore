@@ -4,3 +4,4 @@ report.json
 results.json
 results.out
 /.vscode/
+tests/*/Cargo.lock
