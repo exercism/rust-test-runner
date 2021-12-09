@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "status": "pass",
+  "message": null,
+  "tests": [
+    {
+      "name": "test_another_date",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_another_datetime",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_date",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_datetime",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_third_date",
+      "status": "pass",
+      "message": null
+    }
+  ]
+}
