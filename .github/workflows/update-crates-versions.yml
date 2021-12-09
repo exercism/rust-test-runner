@@ -1,0 +1,31 @@
+name: Update crates versions
+
+defaults:
+  run:
+    shell: bash
+
+on:
+  schedule:
+    # Every Sunday at 00:00
+    - cron:  '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  updateversions:
+    runs-on: ubuntu-latest
+    container:
+      image: rust:1.57.0
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
+        with:
+          fetch-depth: 1
+          ref: main
+      - name: Retrieve newest versions of dependencies
+        run: ./bin/update-crates-versions.sh
+      - name: Create pull request
+        run: |
+          git checkout -b update-crates-versions
+          git add local-registry/Cargo.toml
+          git commit -m "Update crates versions"
+          gh pr create --title "Update crates versions" --body "This is an automated pull request"
