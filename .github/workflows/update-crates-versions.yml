@@ -13,19 +13,26 @@ on:
 jobs:
   updateversions:
     runs-on: ubuntu-latest
-    container:
-      image: rust:1.57.0
     steps:
       - name: Check out the code
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
         with:
           fetch-depth: 1
-          ref: main
+      - name: Setup rust toolchain
+        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af
+        with:
+          toolchain: stable
+          default: true
       - name: Retrieve newest versions of dependencies
         run: ./bin/update-crates-versions.sh
       - name: Create pull request
         run: |
+          git config --global user.email "githubbot@exercism.io"
+          git config --global user.name "Exercism Bot"
           git checkout -b update-crates-versions
           git add local-registry/Cargo.toml
           git commit -m "Update crates versions"
+          git push -u origin update-crates-versions
           gh pr create --title "Update crates versions" --body "This is an automated pull request"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

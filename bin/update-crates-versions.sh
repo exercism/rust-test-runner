@@ -8,6 +8,6 @@ while IFS= read -r line
 do
     crate=$(echo "$line" | awk -F"[ ]+" '{print $1}')
     >&2 echo "Retrieving latest version of $crate..."
-    latest_version=$(cargo search "$crate" | head -n 1 | awk -F"[ ]+" '{print $1  " = " $3}')
-    sed -i -r "s/^$crate =.*/$latest_version/" $MANIFEST
+    latest_version=$(cargo search "$crate" | head -n 1 | awk -F"[ ]+" '{print $1  " = " $3}' | sed 's/"/\\"/g')
+    sed -i "s/^$crate =.*/$latest_version/" $MANIFEST
  done <<< "$DEPS"
