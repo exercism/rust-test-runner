@@ -13,15 +13,6 @@ See:
 - The rust project in this repo is a filter which transforms Cargo's native testing output to the format expected by Exercism
 - The dockerfile contains a multi-stage build: the first stage builds the test script, and the second stage uses it to run the student's solution and test suite and transform the output appropriately
 
-## Run the test runner
-
-To run the tests of an arbitrary exercise, do the following:
-
-1. Open a terminal in the project's root
-2. Run `./bin/run.sh <exercise-slug> <solution-dir> <output-dir>`
-
-Once the test runner has finished, its results will be written to `<output-dir>/results.json`.
-
 ## Run the test runner on an exercise using Docker
 
 _This script is provided for testing purposes, as it mimics how test runners run in Exercism's production environment._
