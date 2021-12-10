@@ -20,6 +20,9 @@ for test_dir in tests/*; do
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
 
+    # Remove any build caches
+    rm -rf "${test_dir}/target"
+
     bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}" > /dev/null 2>&1
 
     # Normalize the results file
