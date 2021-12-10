@@ -21,12 +21,14 @@ for test_dir in tests/*; do
     expected_results_file_path="${test_dir_path}/expected_results.json"
 
     # Remove any build caches
-    rm -rf "${test_dir}/target"
+    rm -rf "${test_dir_path}/target"
+    rm -f "${test_dir_path}/Cargo.lock"
 
     bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}" > /dev/null 2>&1
 
     # Normalize the results file
     jq 'if (.tests != null) then .tests |= sort_by(.name) else . end' "${results_file_path}" > tmp && mv tmp "${results_file_path}"
+    sed -i -e 's/warning: build failed, waiting for other jobs to finish.*//' "${results_file_path}"
 
     echo "${test_dir_name}: comparing results.json to expected_results.json"
     diff "${results_file_path}" "${expected_results_file_path}"
