@@ -28,7 +28,9 @@ if [ -z "$slug" ] || [ -z "$solution_path" ]; then
 fi
 
 cd "$solution_path"
-if [ ! -e Cargo.lock ]; then
+if [ ! -e Cargo.toml ]; then
+    echo "WARNING: student did not upload Cargo.toml. This may cause build errors." | tee -a "$output_path/results.out"
+elif [ ! -e Cargo.lock ]; then
     echo "WARNING: student did not upload Cargo.lock. This may cause build errors." | tee -a "$output_path/results.out"
 fi
 
