@@ -40,7 +40,8 @@ if jq --exit-status '.custom?."test-in-release-mode"?' "$solution_path"/.meta/co
 fi
 
 cargo +nightly test \
-    --offline $release \
+    --offline \
+    $release \
     -- \
     -Z unstable-options \
     --include-ignored \
