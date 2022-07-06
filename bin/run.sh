@@ -34,8 +34,14 @@ elif [ ! -e Cargo.lock ]; then
     echo "WARNING: student did not upload Cargo.lock. This may cause build errors." | tee -a "$output_path/results.out"
 fi
 
+release=""
+if jq --exit-status '.custom?."test-in-release-mode"?' "$solution_path"/.meta/config.json; then
+    release="--release"
+fi
+
 cargo +nightly test \
     --offline \
+    $release \
     -- \
     -Z unstable-options \
     --include-ignored \
