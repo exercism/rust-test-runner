@@ -35,21 +35,24 @@ fn test_extra_underscore_at_beginning() {
 
 #[test]
 fn test_extra_underscore_middle() {
-    let input = String::from("test_valid_strings_with____a_nondigit_added_at_the_end_become_invalid");
+    let input =
+        String::from("test_valid_strings_with____a_nondigit_added_at_the_end_become_invalid");
     let output = String::from("Valid strings with a nondigit added at the end become invalid");
     assert_eq!(formatter::format_test_name(input), output);
 }
 
 #[test]
 fn test_several_extra_whitespaces() {
-    let input = String::from("test_invalid _char _in _middle _with_sum_divisible_by_10_isnt_allowed");
+    let input =
+        String::from("test_invalid _char _in _middle _with_sum_divisible_by_10_isnt_allowed");
     let output = String::from("Invalid char in middle with sum divisible by 10 isnt allowed");
     assert_eq!(formatter::format_test_name(input), output);
 }
 
 #[test]
 fn test_retard_case() {
-    let input = String::from("test__Valid_strIngs_wIth_nuMeric__Unicode_charActers_become__invaliD");
+    let input =
+        String::from("test__Valid_strIngs_wIth_nuMeric__Unicode_charActers_become__invaliD");
     let output = String::from("Valid strings with numeric unicode characters become invalid");
     assert_eq!(formatter::format_test_name(input), output);
 }
@@ -72,19 +75,19 @@ fn test_short_name() {
 fn test_sponsored_by() {
     let input = String::from("_ _ _apple_ _ _");
     let output = String::from("Apple");
-    assert_eq!(format_test_name(input), output);
+    assert_eq!(formatter::format_test_name(input), output);
 }
 
 #[test]
 fn test_only_remove_first_test() {
     let input = String::from("test_only_remove_first_test");
     let output = String::from("Only remove first test");
-    assert_eq!(format_test_name(input), output);
+    assert_eq!(formatter::format_test_name(input), output);
 }
 
 #[test]
 fn test_dont_replace_hidden_test() {
     let input = String::from("protest_against_bad_tests");
     let output = String::from("Protest against bad tests");
-    assert_eq!(format_test_name(input), output);
+    assert_eq!(formatter::format_test_name(input), output);
 }
