@@ -34,6 +34,11 @@
       "message": null
     },
     {
+      "name": "test_several_extra_whitespaces",
+      "status": "pass",
+      "message": null
+    },
+    {
       "name": "test_short_name",
       "status": "pass",
       "message": null
@@ -50,11 +55,6 @@
     },
     {
       "name": "test_trailing_whitespace",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "test_several_extra_whitespaces",
       "status": "pass",
       "message": null
     }
