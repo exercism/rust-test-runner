@@ -1,4 +1,4 @@
 [package]
 edition = "2021"
 name = "formatter"
-version = "0.0.1"
+version = "1.6.0"
