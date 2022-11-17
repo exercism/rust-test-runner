@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "status": "pass",
+  "message": null,
+  "tests": [
+    {
+      "name": "test_name_is_formatted_0",
+      "status": "pass",
+      "message": ""
+    }
+  ]
+}
