@@ -67,9 +67,24 @@ fn test_short_name() {
     let output = String::from("From bytes");
     assert_eq!(formatter::format_test_name(input), output);
 }
+
 #[test]
 fn test_sponsored_by() {
-    let input = String::from("_appletest_");
+    let input = String::from("_ _ _apple_ _ _");
     let output = String::from("Apple");
-    assert_eq!(formatter::format_test_name(input), output);
+    assert_eq!(format_test_name(input), output);
+}
+
+#[test]
+fn test_only_remove_first_test() {
+    let input = String::from("test_only_remove_first_test");
+    let output = String::from("Only remove first test");
+    assert_eq!(format_test_name(input), output);
+}
+
+#[test]
+fn test_dont_replace_hidden_test() {
+    let input = String::from("protest_against_bad_tests");
+    let output = String::from("Protest against bad tests");
+    assert_eq!(format_test_name(input), output);
 }

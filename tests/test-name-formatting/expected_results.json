@@ -4,6 +4,11 @@
   "message": null,
   "tests": [
     {
+      "name": "test_dont_replace_hidden_test",
+      "status": "pass",
+      "message": null
+    },
+    {
       "name": "test_extra_underscore",
       "status": "pass",
       "message": null
@@ -20,6 +25,11 @@
     },
     {
       "name": "test_no_test_prefix",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_only_remove_first_test",
       "status": "pass",
       "message": null
     },
