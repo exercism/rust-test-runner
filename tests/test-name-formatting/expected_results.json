@@ -4,22 +4,7 @@
   "message": null,
   "tests": [
     {
-      "name": "test_regular_test_name",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "test_trailing_whitespace",
-      "status": "pass",
-      "message": null
-    },
-    {
       "name": "test_extra_underscore",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "test_trailing_extra_underscore",
       "status": "pass",
       "message": null
     },
@@ -34,17 +19,17 @@
       "message": null
     },
     {
-      "name": "test_several_extra_whitespaces",
+      "name": "test_no_test_prefix",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_regular_test_name",
       "status": "pass",
       "message": null
     },
     {
       "name": "test_retard_case",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "test_no_test_prefix",
       "status": "pass",
       "message": null
     },
@@ -55,6 +40,21 @@
     },
     {
       "name": "test_sponsored_by",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_trailing_extra_underscore",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_trailing_whitespace",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "test_several_extra_whitespaces",
       "status": "pass",
       "message": null
     }
