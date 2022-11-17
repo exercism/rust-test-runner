@@ -91,7 +91,6 @@ mod test {
             convert(serde_json::Deserializer::from_str(TEST_DATA).into_iter::<ct::TestEvent>());
         assert_eq!(out.status, o::Status::Fail);
         for test in out.tests {
-            println!("{:#?}", test);
             if test.name == "Test::fail" {
                 assert_eq!(test.status, o::Status::Fail);
                 assert!(test.message.is_some());
