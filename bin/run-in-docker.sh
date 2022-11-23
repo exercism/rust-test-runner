@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 # Synopsis:
 # Run the test runner on a solution using the test runner Docker image.
 # The test runner Docker image is built automatically.
