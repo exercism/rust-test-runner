@@ -16,12 +16,12 @@
     {
       "name": "Early years",
       "status": "fail",
-      "message": "thread 'test_early_years' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      "message": "thread 'test_early_years' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\n"
     },
     {
       "name": "Exceptional centuries",
       "status": "fail",
-      "message": "thread 'test_exceptional_centuries' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\n"
+      "message": "thread 'test_exceptional_centuries' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
     },
     {
       "name": "Year divisible by 100 but not by 3 is still not a leap year",
