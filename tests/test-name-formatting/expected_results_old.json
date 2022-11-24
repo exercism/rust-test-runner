@@ -4,72 +4,67 @@
   "message": null,
   "tests": [
     {
-      "name": "Any old year",
+      "name": "test_dont_replace_hidden_test",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Century",
+      "name": "test_extra_underscore",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Early years",
+      "name": "test_extra_underscore_at_beginning",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Exceptional centuries",
+      "name": "test_extra_underscore_middle",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 100 but not by 3 is still not a leap year",
+      "name": "test_no_test_prefix",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 100 not divisible by 400 common year",
+      "name": "test_only_remove_first_test",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 2 not divisible by 4 in common year",
+      "name": "test_regular_test_name",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 200 not divisible by 400 common year",
+      "name": "test_retard_case",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 4 and 5 is still a leap year",
+      "name": "test_several_extra_whitespaces",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 4 not divisible by 100 leap year",
+      "name": "test_short_name",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 400 but not by 125 is still a leap year",
+      "name": "test_sponsored_by",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 400 leap year",
+      "name": "test_trailing_extra_underscore",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year not divisible by 4 common year",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Years 1600 to 1699",
+      "name": "test_trailing_whitespace",
       "status": "pass",
       "message": null
     }

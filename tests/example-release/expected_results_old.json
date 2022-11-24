@@ -4,72 +4,72 @@
   "message": null,
   "tests": [
     {
-      "name": "Any old year",
+      "name": "test_any_old_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Century",
+      "name": "test_century",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Early years",
+      "name": "test_early_years",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Exceptional centuries",
+      "name": "test_exceptional_centuries",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 100 but not by 3 is still not a leap year",
+      "name": "test_year_divisible_by_100_but_not_by_3_is_still_not_a_leap_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 100 not divisible by 400 common year",
+      "name": "test_year_divisible_by_100_not_divisible_by_400_common_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 2 not divisible by 4 in common year",
+      "name": "test_year_divisible_by_200_not_divisible_by_400_common_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 200 not divisible by 400 common year",
+      "name": "test_year_divisible_by_2_not_divisible_by_4_in_common_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 4 and 5 is still a leap year",
+      "name": "test_year_divisible_by_400_but_not_by_125_is_still_a_leap_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 4 not divisible by 100 leap year",
+      "name": "test_year_divisible_by_400_leap_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 400 but not by 125 is still a leap year",
+      "name": "test_year_divisible_by_4_and_5_is_still_a_leap_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year divisible by 400 leap year",
+      "name": "test_year_divisible_by_4_not_divisible_by_100_leap_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Year not divisible by 4 common year",
+      "name": "test_year_not_divisible_by_4_common_year",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Years 1600 to 1699",
+      "name": "test_years_1600_to_1699",
       "status": "pass",
       "message": null
     }
