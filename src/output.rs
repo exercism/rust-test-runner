@@ -39,12 +39,12 @@ impl TestResult {
 *
 * Why is this important? See https://github.com/exercism/exercism/issues/6544 */
 fn format_test_name(name: String) -> String {
-    let name = name.replace("_", " ");
+    let name = name.to_lowercase().replace("_", " ");
     let mut name:Vec<_> = name.split_whitespace().collect();
     if name[0] == "test"{
         name.remove(0);
     }
-    let name = name.join(" ").to_lowercase();
+    let name = name.join(" ");
     let mut c = name.chars();
     match c.next() {
         None => String::new(),
