@@ -34,7 +34,6 @@ impl TestResult {
     }
 }
 
-
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Output {
     pub version: u8,
