@@ -50,7 +50,7 @@ fn test_several_extra_whitespaces() {
 }
 
 #[test]
-fn test_retard_case() {
+fn test_uppercase_in_the_middle_with_multiple_underscores() {
     let input =
         String::from("test__Valid_strIngs_wIth_nuMeric__Unicode_charActers_become__invaliD");
     let output = String::from("Valid strings with numeric unicode characters become invalid");
@@ -72,22 +72,8 @@ fn test_short_name() {
 }
 
 #[test]
-fn test_sponsored_by() {
+fn test_remove_multiple_underscores_and_whitespaces() {
     let input = String::from("_ _ _apple_ _ _");
     let output = String::from("Apple");
-    assert_eq!(formatter::format_test_name(input), output);
-}
-
-#[test]
-fn test_only_remove_first_test() {
-    let input = String::from("test_only_remove_first_test");
-    let output = String::from("Only remove first test");
-    assert_eq!(formatter::format_test_name(input), output);
-}
-
-#[test]
-fn test_dont_replace_hidden_test() {
-    let input = String::from("protest_against_bad_tests");
-    let output = String::from("Protest against bad tests");
     assert_eq!(formatter::format_test_name(input), output);
 }

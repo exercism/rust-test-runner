@@ -4,11 +4,6 @@
   "message": null,
   "tests": [
     {
-      "name": "Dont replace hidden test",
-      "status": "pass",
-      "message": null
-    },
-    {
       "name": "Extra underscore",
       "status": "pass",
       "message": null
@@ -29,17 +24,12 @@
       "message": null
     },
     {
-      "name": "Only remove first test",
-      "status": "pass",
-      "message": null
-    },
-    {
       "name": "Regular test name",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Retard case",
+      "name": "Remove multiple underscores and whitespaces",
       "status": "pass",
       "message": null
     },
@@ -54,17 +44,17 @@
       "message": null
     },
     {
-      "name": "Sponsored by",
-      "status": "pass",
-      "message": null
-    },
-    {
       "name": "Trailing extra underscore",
       "status": "pass",
       "message": null
     },
     {
       "name": "Trailing whitespace",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Uppercase in the middle with multiple underscores",
       "status": "pass",
       "message": null
     }
