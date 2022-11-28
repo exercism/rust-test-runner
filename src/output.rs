@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::test_name_formatter::format_test_name;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
