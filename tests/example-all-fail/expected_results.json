@@ -6,12 +6,12 @@
     {
       "name": "Any old year",
       "status": "fail",
-      "message": "thread 'test_any_old_year' panicked at 'assertion failed: `(left == right)`\n  left: `true`,\n right: `false`', tests/leap.rs:2:5\n"
+      "message": "thread 'test_any_old_year' panicked at 'assertion failed: `(left == right)`\n  left: `true`,\n right: `false`', tests/leap.rs:2:5\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
     },
     {
       "name": "Century",
       "status": "fail",
-      "message": "thread 'test_century' panicked at 'assertion failed: `(left == right)`\n  left: `true`,\n right: `false`', tests/leap.rs:2:5\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+      "message": "thread 'test_century' panicked at 'assertion failed: `(left == right)`\n  left: `true`,\n right: `false`', tests/leap.rs:2:5\n"
     },
     {
       "name": "Early years",
