@@ -1,5 +1,6 @@
 pub mod cargo_test;
 pub mod output;
+pub mod test_name_formatter;
 
 use cargo_test as ct;
 use output as o;
@@ -91,7 +92,7 @@ mod test {
             convert(serde_json::Deserializer::from_str(TEST_DATA).into_iter::<ct::TestEvent>());
         assert_eq!(out.status, o::Status::Fail);
         for test in out.tests {
-            if test.name == "test::fail" {
+            if test.name == "Test::fail" {
                 assert_eq!(test.status, o::Status::Fail);
                 assert!(test.message.is_some());
             } else {

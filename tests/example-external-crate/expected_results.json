@@ -4,27 +4,27 @@
   "message": null,
   "tests": [
     {
-      "name": "test_another_date",
+      "name": "Another date",
       "status": "pass",
       "message": null
     },
     {
-      "name": "test_another_datetime",
+      "name": "Another datetime",
       "status": "pass",
       "message": null
     },
     {
-      "name": "test_date",
+      "name": "Date",
       "status": "pass",
       "message": null
     },
     {
-      "name": "test_datetime",
+      "name": "Datetime",
       "status": "pass",
       "message": null
     },
     {
-      "name": "test_third_date",
+      "name": "Third date",
       "status": "pass",
       "message": null
     }

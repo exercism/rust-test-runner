@@ -1,3 +1,4 @@
+use crate::test_name_formatter::format_test_name;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -18,7 +19,7 @@ pub struct TestResult {
 impl TestResult {
     pub fn ok(name: String) -> TestResult {
         TestResult {
-            name,
+            name: format_test_name(name),
             status: Status::Pass,
             message: None,
         }
@@ -26,7 +27,7 @@ impl TestResult {
 
     pub fn fail(name: String, message: Option<String>) -> TestResult {
         TestResult {
-            name,
+            name: format_test_name(name),
             message,
             status: Status::Fail,
         }

@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "status": "pass",
+  "message": null,
+  "tests": [
+    {
+      "name": "Extra underscore",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Extra underscore at beginning",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Extra underscore middle",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "No test prefix",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Regular test name",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Remove multiple underscores and whitespaces",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Several extra whitespaces",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Short name",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Trailing extra underscore",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Trailing whitespace",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Uppercase in the middle with multiple underscores",
+      "status": "pass",
+      "message": null
+    }
+  ]
+}
