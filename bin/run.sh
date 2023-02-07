@@ -39,7 +39,7 @@ if jq --exit-status '.custom?."test-in-release-mode"?' "$solution_path"/.meta/co
     release="--release"
 fi
 
-cargo +nightly test \
+timeout -v 15s cargo +nightly test \
     --offline \
     $release \
     -- \
@@ -51,6 +51,10 @@ cargo +nightly test \
         /opt/test-runner/bin/transform-output \
         > "$output_path"/results.json
 
-if grep -q "probable build failure" "$output_path"/results.json; then
+# Note: there is no test report output after the test timeout, so the transformer generates a generic "probable build failure" message.
+# If we want a custom message for timeouts, we need to handle this case separately.
+if grep -q "timeout: sending signal TERM" "$output_path"/results.out; then
+   jq -n --rawfile m "$output_path"/results.out '{"version": 2, status: "error", message:"One of the tests timed out"}' > "$output_path"/results.json
+elif grep -q "probable build failure" "$output_path"/results.json; then
    jq -n --rawfile m "$output_path"/results.out '{status: "error", message:$m}' > "$output_path"/results.json
 fi
