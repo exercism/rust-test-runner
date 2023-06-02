@@ -1,5 +1,5 @@
 # always build this using the latest stable release
-FROM rust:1.66.0 as build
+FROM rust:1.70.0 as build
 
 
 ARG JQ_VERSION=1.6
@@ -34,7 +34,7 @@ COPY local-registry/* ./
 RUN ${wd}/bin/generate-registry.sh
 
 # As of Dec 2019, we need to use the nightly toolchain to get JSON test output
-FROM rust:1.66.0 AS test
+FROM rust:1.70.0 AS test
 RUN rustup toolchain add nightly
 ENV wd /opt/test-runner
 RUN mkdir -p ${wd}/bin
