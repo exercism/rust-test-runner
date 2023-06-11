@@ -46,8 +46,20 @@ timeout -v 15s cargo +nightly test \
     -Z unstable-options \
     --include-ignored \
     --format json \
-    2> >(tee -a "$output_path"/results.out >&2) \
-    |\
+    2> >(
+        # don't interpret the backticks in the sed command as expressions
+        # shellcheck disable=SC2016
+        #
+        # This sed command fixes a flakiness issue for tests that fail to compile.
+        # For the test example-syntax-error,
+        # the following two output lines may appear in random order:
+        #
+        # error: could not compile `leap` (lib) due to 2 previous errors
+        # error: could not compile `leap` (lib test) due to 2 previous errors
+        #
+        # Therefore, we remove the stuff in the parentheses.
+        sed 's/could not compile `\(.*\)` (.*)/could not compile `\1`/g' >> "$output_path"/results.out
+    ) | \
         /opt/test-runner/bin/transform-output \
         > "$output_path"/results.json
 
