@@ -42,11 +42,11 @@ RUN ${wd}/bin/generate-registry.sh
 # version tag with a nightly one, pinned to a specific date.
 
 # official Dockerfile source: 
-# https://github.com/rust-lang/docker-rust/blob/master/1.71.0/bookworm/Dockerfile
+# https://github.com/rust-lang/docker-rust/blob/master/1.71.0/bookworm/slim/Dockerfile
 
 ################ start-copy-pasta ################
 
-FROM buildpack-deps:bookworm
+FROM debian:bookworm-slim
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -56,6 +56,13 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 #                 pin version here
 
 RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        gcc \
+        libc6-dev \
+        wget \
+        ; \
     dpkgArch="$(dpkg --print-architecture)"; \
     case "${dpkgArch##*-}" in \
         amd64) rustArch='x86_64-unknown-linux-gnu'; rustupSha256='0b2f6c8f85a3d02fde2efc0ced4657869d73fccfce59defb4e8d29233116e6db' ;; \
@@ -73,7 +80,11 @@ RUN set -eux; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
     rustup --version; \
     cargo --version; \
-    rustc --version;
+    rustc --version; \
+    apt-get remove -y --auto-remove \
+        wget \
+        ; \
+    rm -rf /var/lib/apt/lists/*;
 
 ################ end-copy-pasta ################
 
