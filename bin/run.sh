@@ -39,7 +39,7 @@ if jq --exit-status '.custom?."test-in-release-mode"?' "$solution_path"/.meta/co
     release="--release"
 fi
 
-timeout -v 15s cargo +nightly test \
+timeout -v 15s cargo test \
     --offline \
     $release \
     -- \
