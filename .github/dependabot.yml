@@ -1,0 +1,16 @@
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+
+updates:
+  - package-ecosystem: 'cargo'
+    directory: '/local-registry'
+    schedule:
+      interval: 'weekly'
+    groups:
+      - all:
+        patterns:
+         - "*"
+    versioning-strategy: 'increase'
+    labels:
+      - 'x:rep/tiny'
