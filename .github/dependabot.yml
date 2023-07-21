@@ -11,6 +11,5 @@ updates:
       all:
         patterns:
          - "*"
-    versioning-strategy: 'increase'
     labels:
       - 'x:rep/tiny'
