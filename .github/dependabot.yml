@@ -8,7 +8,7 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      - all:
+      all:
         patterns:
          - "*"
     versioning-strategy: 'increase'
