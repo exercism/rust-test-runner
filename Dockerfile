@@ -5,7 +5,7 @@ FROM rust:1.71.0 as build
 ARG JQ_VERSION=1.6
 ARG JQ_URL=https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64
 
-ARG SC_VERSION=v0.2.15
+ARG SC_VERSION=v0.5.4
 ARG SC_URL=https://github.com/mozilla/sccache/releases/download/${SC_VERSION}/sccache-${SC_VERSION}-x86_64-unknown-linux-musl.tar.gz
 
 ENV SCCACHE_DIR=/opt/compilation-cache
