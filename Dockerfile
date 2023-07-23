@@ -48,6 +48,8 @@ RUN cargo generate-lockfile && cargo local-registry --sync Cargo.lock .
 
 # populate compilation cache
 RUN cargo build
+# but remove large target folder
+RUN cargo clean
 
 # As of Dec 2019, we need to use the nightly toolchain to get JSON test output
 # tracking issue: https://github.com/rust-lang/rust/issues/49359
