@@ -81,7 +81,7 @@ RUN mkdir -p ${SCCACHE_DIR}
 RUN apt-get update && apt-get install -y \
     gcc openssl cmake \
     # needed due to use of debian-slim. regular debian has these already.
-    libssl-dev pkg-config m4
+    libssl-dev pkg-config
 
 RUN mkdir -p /rust-test-runner/src
 ENV wd /rust-test-runner
@@ -107,18 +107,18 @@ RUN cargo install cargo-local-registry
 WORKDIR /local-registry
 COPY local-registry/* ./
 RUN cargo generate-lockfile && cargo local-registry --sync Cargo.lock .
+# only keep the local registry
+RUN rm Cargo.* dummy.rs
 
-# populate compilation cache
-RUN cargo build
-# but remove large target folder
-RUN cargo clean
-
-FROM rust-nightly
+# The environment should be as identical as possible between populating and
+# using the compilation cache, so we put this environment in a separate build
+# stage that can be shared.
+FROM rust-nightly as test-env
 
 ENV SCCACHE_DIR=/opt/compilation-cache
 ENV RUSTC_WRAPPER=/usr/local/bin/sccache
 COPY --from=build ${RUSTC_WRAPPER} ${RUSTC_WRAPPER}
-COPY --from=build ${SCCACHE_DIR} ${SCCACHE_DIR}
+RUN mkdir -p ${SCCACHE_DIR}
 
 ENV wd /opt/test-runner
 RUN mkdir -p ${wd}/bin
@@ -133,6 +133,16 @@ RUN echo '[source.crates-io]\n\
     \n\
     [source.local-registry]\n\
     local-registry = "/opt/test-runner/local-registry/"\n' >> $CARGO_HOME/config.toml
-# set entrypoint
+
+# populate compilation cache in the same environment as the tests will run
+FROM test-env AS cache
+RUN apt-get update && apt-get install -y m4
+WORKDIR /local-registry
+COPY local-registry/* ./
+RUN cargo build
+
+# final stage
+FROM test-env
+COPY --from=cache ${SCCACHE_DIR} ${SCCACHE_DIR}
 COPY bin/run.sh bin
 ENTRYPOINT ["bin/run.sh"]
