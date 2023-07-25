@@ -1,56 +1,3 @@
-# always build this using the latest stable release
-FROM rust:1.71.0 as build
-
-
-ARG JQ_VERSION=1.6
-ARG JQ_URL=https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64
-
-ARG SC_VERSION=v0.5.4
-ARG SC_URL=https://github.com/mozilla/sccache/releases/download/${SC_VERSION}/sccache-${SC_VERSION}-x86_64-unknown-linux-musl.tar.gz
-
-ENV SCCACHE_DIR=/opt/compilation-cache
-ENV RUSTC_WRAPPER=/usr/local/bin/sccache
-
-# download sccache
-RUN curl -L -o sccache.tgz "${SC_URL}" \
- && tar xvzf sccache.tgz --strip-components=1 \
- && cp sccache ${RUSTC_WRAPPER} \
- && chmod +x ${RUSTC_WRAPPER}
-RUN mkdir -p ${SCCACHE_DIR}
-
-# install cargo-local-registry dependencies
-RUN apt-get update && apt-get install -y gcc openssl cmake
-
-RUN mkdir -p /rust-test-runner/src
-ENV wd /rust-test-runner
-WORKDIR ${wd}
-COPY Cargo.* ./
-
-# for caching, we want to download and build all the dependencies before copying
-# any of the real source files. We therefore build an empty dummy library,
-# then remove it.
-RUN echo '// dummy file' > src/lib.rs
-RUN cargo build
-# now get rid of the stub and copy the real source files
-RUN rm src/lib.rs
-COPY src/* src/
-# build the executable
-RUN cargo build --release
-# download jq
-RUN curl -L -o /usr/local/bin/jq "${JQ_URL}" \
-    && chmod +x /usr/local/bin/jq
-# install cargo-local-registry
-RUN cargo install cargo-local-registry
-# download popular crates to local registry
-WORKDIR /local-registry
-COPY local-registry/* ./
-RUN cargo generate-lockfile && cargo local-registry --sync Cargo.lock .
-
-# populate compilation cache
-RUN cargo build
-# but remove large target folder
-RUN cargo clean
-
 # As of Dec 2019, we need to use the nightly toolchain to get JSON test output
 # tracking issue: https://github.com/rust-lang/rust/issues/49359
 
@@ -64,7 +11,7 @@ RUN cargo clean
 
 ################ start-copy-pasta ################
 
-FROM debian:bookworm-slim
+FROM debian:bookworm-slim as rust-nightly
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -105,6 +52,68 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*;
 
 ################ end-copy-pasta ################
+
+# The build stage must use the same compiler version as the test runner itself,
+# otherwise sccache will not work. Compilation artifacts from different versions
+# of the Rust compiler are incompatible.
+FROM rust-nightly as build
+
+ARG JQ_VERSION=1.6
+ARG JQ_URL=https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64
+
+ARG SC_VERSION=v0.5.4
+ARG SC_URL=https://github.com/mozilla/sccache/releases/download/${SC_VERSION}/sccache-${SC_VERSION}-x86_64-unknown-linux-musl.tar.gz
+
+ENV SCCACHE_DIR=/opt/compilation-cache
+ENV RUSTC_WRAPPER=/usr/local/bin/sccache
+
+# install basic things missing in debian-slim
+RUN apt-get update && apt-get install -y curl
+
+# download sccache
+RUN curl -L -o sccache.tgz "${SC_URL}" \
+ && tar xvzf sccache.tgz --strip-components=1 \
+ && cp sccache ${RUSTC_WRAPPER} \
+ && chmod +x ${RUSTC_WRAPPER}
+RUN mkdir -p ${SCCACHE_DIR}
+
+# install cargo-local-registry dependencies
+RUN apt-get update && apt-get install -y \
+    gcc openssl cmake \
+    # needed due to use of debian-slim. regular debian has these already.
+    libssl-dev pkg-config m4
+
+RUN mkdir -p /rust-test-runner/src
+ENV wd /rust-test-runner
+WORKDIR ${wd}
+COPY Cargo.* ./
+
+# for caching, we want to download and build all the dependencies before copying
+# any of the real source files. We therefore build an empty dummy library,
+# then remove it.
+RUN echo '// dummy file' > src/lib.rs
+RUN cargo build
+# now get rid of the stub and copy the real source files
+RUN rm src/lib.rs
+COPY src/* src/
+# build the executable
+RUN cargo build --release
+# download jq
+RUN curl -L -o /usr/local/bin/jq "${JQ_URL}" \
+    && chmod +x /usr/local/bin/jq
+# install cargo-local-registry
+RUN cargo install cargo-local-registry
+# download popular crates to local registry
+WORKDIR /local-registry
+COPY local-registry/* ./
+RUN cargo generate-lockfile && cargo local-registry --sync Cargo.lock .
+
+# populate compilation cache
+RUN cargo build
+# but remove large target folder
+RUN cargo clean
+
+FROM rust-nightly
 
 ENV SCCACHE_DIR=/opt/compilation-cache
 ENV RUSTC_WRAPPER=/usr/local/bin/sccache
