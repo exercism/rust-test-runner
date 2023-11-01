@@ -13,7 +13,7 @@
 /// #### Why is this important?
 /// See [Long test names and test-summaries have visible overflow #6544](https://github.com/exercism/exercism/issues/6544)
 pub fn format_test_name(name: String) -> String {
-    let name = name.to_lowercase().replace("_", " ");
+    let name = name.to_lowercase().replace('_', " ");
     let mut name: Vec<_> = name.split_whitespace().collect();
     if name[0] == "test" {
         name.remove(0);
