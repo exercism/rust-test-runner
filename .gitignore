@@ -5,4 +5,3 @@ results.json
 results.out
 /.vscode/
 tests/*/Cargo.lock
-local-registry/Cargo.lock
