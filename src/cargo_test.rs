@@ -35,7 +35,7 @@ pub struct TestEvent {
 mod test {
     use super::*;
 
-    const TEST_DATA: &'static str = r#"
+    const TEST_DATA: &str = r#"
 { "type": "suite", "event": "started", "test_count": 2 }
 { "type": "test", "event": "started", "name": "test::fail" }
 { "type": "test", "event": "started", "name": "test::pass" }

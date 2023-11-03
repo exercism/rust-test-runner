@@ -66,16 +66,7 @@ where
 mod test {
     use super::*;
 
-    #[test]
-    fn pass() {}
-
-    #[test]
-    #[ignore]
-    fn fail() {
-        assert!(false);
-    }
-
-    const TEST_DATA: &'static str = r#"
+    const TEST_DATA: &str = r#"
 { "type": "suite", "event": "started", "test_count": 3 }
 { "type": "test", "event": "started", "name": "cargo_test::test::test_parse_events" }
 { "type": "test", "event": "started", "name": "test::fail" }
