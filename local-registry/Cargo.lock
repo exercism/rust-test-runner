@@ -736,7 +736,6 @@ dependencies = [
  "enum-iterator",
  "enum-primitive-derive",
  "enumset",
- "factorial",
  "fancy-regex",
  "fasteval",
  "fixedbitset",
@@ -947,16 +946,6 @@ checksum = "7c18ee0ed65a5f1f81cac6b1d213b69c35fa47d4252ad41f1486dbd8226fe36e"
 dependencies = [
  "libc",
  "windows-sys",
-]
-
-[[package]]
-name = "factorial"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d18df35a8a0dadf5b6f2e12fcb1c8c041171065b3a31e4c5b8777ba449cb414a"
-dependencies = [
- "num-traits",
- "primal-sieve",
 ]
 
 [[package]]
