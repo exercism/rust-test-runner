@@ -738,7 +738,6 @@ dependencies = [
  "enumset",
  "fixedbitset",
  "flagset",
- "fnv",
  "foreach",
  "free-ranges",
  "frunk",
