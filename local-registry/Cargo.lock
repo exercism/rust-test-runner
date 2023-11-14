@@ -744,7 +744,6 @@ dependencies = [
  "hexlit",
  "if_chain",
  "im",
- "incremental-topo",
  "indexmap",
  "indoc",
  "inflections",
@@ -1140,15 +1139,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1d758ba1b47b00caf47f24925c0074ecb20d6dfcffe7f6d53395c0465674841a"
 
 [[package]]
-name = "generational-arena"
-version = "0.2.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "877e94aff08e743b651baaea359664321055749b398adff8740a7399af7796e7"
-dependencies = [
- "cfg-if",
-]
-
-[[package]]
 name = "generic-array"
 version = "0.14.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1283,17 +1273,6 @@ dependencies = [
  "sized-chunks",
  "typenum",
  "version_check",
-]
-
-[[package]]
-name = "incremental-topo"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2c64c3f08df78a032ce8d9572029d5063acc67c9494daad23fb2288bf316c1b1"
-dependencies = [
- "fnv",
- "generational-arena",
- "log",
 ]
 
 [[package]]
