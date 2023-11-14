@@ -735,7 +735,6 @@ dependencies = [
  "either",
  "enum-iterator",
  "enum-primitive-derive",
- "enum_derive",
  "enumflags2",
  "enumset",
  "eval",
@@ -906,12 +905,6 @@ dependencies = [
  "quote",
  "syn 1.0.109",
 ]
-
-[[package]]
-name = "enum_derive"
-version = "0.1.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "406ac2a8c9eedf8af9ee1489bee9e50029278a6456c740f7454cf8a158abc816"
 
 [[package]]
 name = "enumflags2"
