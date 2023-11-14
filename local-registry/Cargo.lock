@@ -739,7 +739,6 @@ dependencies = [
  "time",
  "tinyset",
  "transpose",
- "unic-char-range",
  "unic-normal",
  "unic-segment",
  "unicase",
