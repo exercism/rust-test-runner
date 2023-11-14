@@ -723,7 +723,6 @@ dependencies = [
  "rand",
  "rand_chacha",
  "rayon",
- "recur-fn",
  "regex",
  "reikna",
  "rs_poker",
@@ -2017,12 +2016,6 @@ dependencies = [
  "crossbeam-deque",
  "crossbeam-utils",
 ]
-
-[[package]]
-name = "recur-fn"
-version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ddb239d0574f3f7a7f44da906a0484f1fc284f89cfbc4eca1895420dbf948201"
 
 [[package]]
 name = "redox_syscall"
