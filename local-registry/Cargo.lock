@@ -746,7 +746,6 @@ dependencies = [
  "unzip-n",
  "uuid",
  "voca_rs",
- "watch",
  "xvii",
 ]
 
@@ -2665,12 +2664,6 @@ name = "wasm-bindgen-shared"
 version = "0.2.88"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0d046c5d029ba91a1ed14da14dca44b68bf2f124cfbaf741c54151fdb3e0750b"
-
-[[package]]
-name = "watch"
-version = "0.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ed390fa2f6c6036b4dad0a2695711971998ac185f629e4b5d3d5cb3e4ff5c65"
 
 [[package]]
 name = "web-sys"
