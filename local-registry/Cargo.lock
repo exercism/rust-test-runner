@@ -664,12 +664,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "dia-time"
-version = "7.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75934a17debc0cdac75732d1eb696c0487da405e3f1f4e10beafab6252146612"
-
-[[package]]
 name = "diff"
 version = "0.1.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -733,7 +727,6 @@ dependencies = [
  "crossbeam-utils",
  "dashmap",
  "derive_more",
- "dia-time",
  "digits_iterator",
  "divisors",
  "divrem",
