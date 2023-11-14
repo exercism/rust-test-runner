@@ -958,7 +958,6 @@ dependencies = [
  "unic-normal",
  "unic-segment",
  "unicase",
- "unicode-case-mapping",
  "unicode-normalization",
  "unicode-reverse",
  "unicode-segmentation",
@@ -3418,12 +3417,6 @@ checksum = "f7d2d4dafb69621809a81864c9c1b864479e1235c0dd4e199924b9742439ed89"
 dependencies = [
  "version_check",
 ]
-
-[[package]]
-name = "unicode-case-mapping"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b92e07ac57786e12073609c8a91417884306b753d974108ca48c8434ed9b99cb"
 
 [[package]]
 name = "unicode-ident"
