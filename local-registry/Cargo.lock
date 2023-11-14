@@ -738,7 +738,6 @@ dependencies = [
  "threadpool",
  "time",
  "tinyset",
- "tramp",
  "transpose",
  "unic-char-range",
  "unic-normal",
@@ -2450,12 +2449,6 @@ dependencies = [
  "toml_datetime",
  "winnow",
 ]
-
-[[package]]
-name = "tramp"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1ee032eda9f2e819b93fed2bbb2ea4e459b78cd0141b9e3644ec6dc013b2cf4"
 
 [[package]]
 name = "transpose"
