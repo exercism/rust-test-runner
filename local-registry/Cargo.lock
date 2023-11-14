@@ -630,16 +630,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "defaultmap"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "15f9f7643e6fa6842f55898be3182c1e5b59447779e0dd55b50f9c601b2bf7c3"
-dependencies = [
- "derive_more 1.0.0-beta.3",
- "dyn-clone",
-]
-
-[[package]]
 name = "deprecate-until"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -682,27 +672,6 @@ dependencies = [
  "quote",
  "rustc_version",
  "syn 1.0.109",
-]
-
-[[package]]
-name = "derive_more"
-version = "1.0.0-beta.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f1335e0609db169713d97c340dd769773c6c63cd953c8fcf1063043fd3d6dd11"
-dependencies = [
- "derive_more-impl",
-]
-
-[[package]]
-name = "derive_more-impl"
-version = "1.0.0-beta.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "df541e0e2a8069352be228ce4b85a1da6f59bfd325e56f57e4b241babbc3f832"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.39",
- "unicode-xid",
 ]
 
 [[package]]
@@ -780,9 +749,8 @@ dependencies = [
  "crossbeam-channel",
  "crossbeam-utils",
  "dashmap",
- "defaultmap",
  "derivative",
- "derive_more 0.99.17",
+ "derive_more",
  "deunicode",
  "dia-time",
  "digits_iterator",
@@ -922,12 +890,6 @@ dependencies = [
  "heck",
  "proc-macro-error",
 ]
-
-[[package]]
-name = "dyn-clone"
-version = "1.0.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "545b22097d44f8a9581187cdf93de7a71e4722bf51200cfaba810865b49a495d"
 
 [[package]]
 name = "easybench"
@@ -3355,12 +3317,6 @@ name = "unicode-segmentation"
 version = "1.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1dd624098567895118886609431a7c3b8f516e41d30e0643f03d94592a147e36"
-
-[[package]]
-name = "unicode-xid"
-version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f962df74c8c05a667b5ee8bcf162993134c104e96440b663c8daa176dc772d8c"
 
 [[package]]
 name = "unicode_reader"
