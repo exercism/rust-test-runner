@@ -762,7 +762,6 @@ dependencies = [
  "once_cell",
  "pest",
  "pest_derive",
- "petgraph",
  "phf",
  "phf_macros",
  "pprof",
@@ -1854,16 +1853,6 @@ dependencies = [
  "once_cell",
  "pest",
  "sha2",
-]
-
-[[package]]
-name = "petgraph"
-version = "0.6.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e1d3afd2628e69da2be385eb6f2fd57c8ac7977ceeff6dc166ff1657b0e386a9"
-dependencies = [
- "fixedbitset",
- "indexmap",
 ]
 
 [[package]]
