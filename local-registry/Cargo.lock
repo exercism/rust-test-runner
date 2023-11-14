@@ -736,7 +736,6 @@ dependencies = [
  "enum-iterator",
  "enum-primitive-derive",
  "enumset",
- "factor",
  "factorial",
  "fancy-regex",
  "fasteval",
@@ -949,12 +948,6 @@ dependencies = [
  "libc",
  "windows-sys",
 ]
-
-[[package]]
-name = "factor"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "102e2f39755a9cd85dc5f4d932367a516089ea7d50528c6d30eb5ca4fb6030df"
 
 [[package]]
 name = "factorial"
