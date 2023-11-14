@@ -306,12 +306,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
-name = "char-iter"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "03d6bd66ffe2fce2488985b469557d94e5a7b9b94d8ec1e566e3b6cadd5e41c8"
-
-[[package]]
 name = "char_stream"
 version = "0.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -811,7 +805,6 @@ dependencies = [
  "bytecount",
  "cached",
  "cast",
- "char-iter",
  "char_stream",
  "chrono",
  "compare",
