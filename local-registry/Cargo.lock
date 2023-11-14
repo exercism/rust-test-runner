@@ -740,7 +740,6 @@ dependencies = [
  "flagset",
  "frunk",
  "gcd",
- "generational-arena",
  "grapheme",
  "hashbag",
  "hexlit",
