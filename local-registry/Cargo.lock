@@ -724,7 +724,6 @@ dependencies = [
  "rand_chacha",
  "rayon",
  "regex",
- "reikna",
  "rs_poker",
  "rstest",
  "rstest_reuse",
@@ -2054,12 +2053,6 @@ name = "regex-syntax"
 version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c08c74e62047bb2de4ff487b251e4a92e24f48745648451635cec7d591162d9f"
-
-[[package]]
-name = "reikna"
-version = "0.12.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "587f2b12c725829d56d8192817535cbfe3c4b5daf294622765cec5969d980eca"
 
 [[package]]
 name = "relative-path"
