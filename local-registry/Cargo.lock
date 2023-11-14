@@ -301,15 +301,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fd6c0e7b807d60291f42f33f58480c0bfafe28ed08286446f45e463728cf9c1c"
 
 [[package]]
-name = "case_insensitive_hashmap"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc8a3bc53bf02f78dedee7bfb0465a52dac5342fb173d92f0341624322d15592"
-dependencies = [
- "unicase",
-]
-
-[[package]]
 name = "caseless"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -858,7 +849,6 @@ dependencies = [
  "bytecount",
  "cached",
  "case",
- "case_insensitive_hashmap",
  "caseless",
  "cast",
  "change-case",
