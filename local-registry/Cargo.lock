@@ -758,7 +758,6 @@ dependencies = [
  "memoize",
  "mod_exp",
  "modinverse",
- "modulo",
  "multimap",
  "multiset",
  "ndarray",
@@ -1551,12 +1550,6 @@ checksum = "2f62f577f148cc1a9466e7065a22e59466a7d537cceba5e77e57181d0f706633"
 dependencies = [
  "num-integer",
 ]
-
-[[package]]
-name = "modulo"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "53db447cac1df8402bef9a2ccacb0ea0dd1061b935e9e9ab9e5082c516aaada8"
 
 [[package]]
 name = "multimap"
