@@ -306,12 +306,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
-name = "char_stream"
-version = "0.1.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a84c13e86e114781646edf6b4732400fb99e5ed4a91b14625282d936d9426666"
-
-[[package]]
 name = "chrono"
 version = "0.4.31"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -805,7 +799,6 @@ dependencies = [
  "bytecount",
  "cached",
  "cast",
- "char_stream",
  "chrono",
  "compare",
  "conv",
