@@ -742,7 +742,6 @@ dependencies = [
  "gcd",
  "hashbag",
  "hexlit",
- "humantime",
  "if_chain",
  "im",
  "incremental-topo",
@@ -1236,12 +1235,6 @@ name = "hexlit"
 version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5b6e75c860d4216ac53f9ac88b25c99eaedba075b3a7b2ed31f2adc51a74fffd"
-
-[[package]]
-name = "humantime"
-version = "2.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
 
 [[package]]
 name = "iana-time-zone"
