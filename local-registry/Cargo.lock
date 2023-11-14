@@ -736,7 +736,6 @@ dependencies = [
  "enum-iterator",
  "enum-primitive-derive",
  "enumset",
- "eval",
  "evalexpr",
  "factor",
  "factorial",
@@ -950,17 +949,6 @@ checksum = "7c18ee0ed65a5f1f81cac6b1d213b69c35fa47d4252ad41f1486dbd8226fe36e"
 dependencies = [
  "libc",
  "windows-sys",
-]
-
-[[package]]
-name = "eval"
-version = "0.4.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba90c19bed0c67afb0a24340b42d13ddddcb5413c4c17a04c11871bd6b572c42"
-dependencies = [
- "quick-error",
- "serde",
- "serde_json",
 ]
 
 [[package]]
