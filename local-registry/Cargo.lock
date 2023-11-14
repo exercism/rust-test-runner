@@ -752,7 +752,6 @@ dependencies = [
  "itoa",
  "kmp",
  "lazy_static",
- "libm",
  "linked-hash-map",
  "linked_hash_set",
  "maplit",
