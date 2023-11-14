@@ -800,7 +800,6 @@ dependencies = [
  "cached",
  "cast",
  "chrono",
- "compare",
  "conv",
  "convert_case 0.6.0",
  "counted-array",
