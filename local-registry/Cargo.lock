@@ -746,7 +746,6 @@ dependencies = [
  "im",
  "indexmap",
  "indoc",
- "inflections",
  "int-enum",
  "integer-sqrt",
  "itertools 0.11.0",
@@ -1290,12 +1289,6 @@ name = "indoc"
 version = "2.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1e186cfbae8084e513daff4240b4797e342f988cecda4fb6c939150f96315fd8"
-
-[[package]]
-name = "inflections"
-version = "1.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a257582fdcde896fd96463bf2d40eefea0580021c0712a0e2b028b60b47a837a"
 
 [[package]]
 name = "instant"
