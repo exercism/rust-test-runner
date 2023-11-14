@@ -728,7 +728,6 @@ dependencies = [
  "rstest_reuse",
  "serde",
  "serde_derive",
- "sparse-bitfield",
  "spinning_top",
  "static_assertions",
  "strfmt",
@@ -1387,12 +1386,6 @@ dependencies = [
  "quote",
  "syn 1.0.109",
 ]
-
-[[package]]
-name = "memory-pager"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ad05e53b413682ea2aa20b027babc7316d5c637f5f52cff4b042f825fb76f9bb"
 
 [[package]]
 name = "minimal-lexical"
@@ -2236,15 +2229,6 @@ name = "smallvec"
 version = "1.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4dccd0940a2dcdf68d092b8cbab7dc0ad8fa938bf95787e1b916b0e3d0e8e970"
-
-[[package]]
-name = "sparse-bitfield"
-version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f98e2a9d642ccbbd1b67dff822a7d3115f18f133bf840ca3e551567eabdee074"
-dependencies = [
- "memory-pager",
-]
 
 [[package]]
 name = "spinning_top"
