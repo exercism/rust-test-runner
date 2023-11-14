@@ -858,7 +858,6 @@ dependencies = [
  "bimap",
  "binary-heap-plus",
  "bit-set",
- "bit-vec",
  "bitflags 2.4.1",
  "bitvec",
  "boolinator",
