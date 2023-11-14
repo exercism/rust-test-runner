@@ -8,7 +8,6 @@ path = "dummy.rs"
 
 [dependencies]
 anyhow = "1.0.72"
-array_tool = "1.0.3"
 arrayvec = "0.7.4"
 arr_macro = "0.2.1"
 ascii = "1.1.0"
