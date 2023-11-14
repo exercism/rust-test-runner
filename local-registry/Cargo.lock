@@ -182,12 +182,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "binomial-iter"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e3cbaf64b254fc7e1441732525bfcf91169aa4ce61984450b7fe958770e559f0"
-
-[[package]]
 name = "bit-set"
 version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -863,7 +857,6 @@ dependencies = [
  "bigdecimal",
  "bimap",
  "binary-heap-plus",
- "binomial-iter",
  "bit-set",
  "bit-vec",
  "bitflags 2.4.1",
