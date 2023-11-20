@@ -1054,7 +1054,7 @@ dependencies = [
  "inflections",
  "int-enum",
  "integer-sqrt",
- "itertools 0.11.0",
+ "itertools 0.12.0",
  "itoa",
  "kmp",
  "lazy_static 1.4.0",
@@ -1323,9 +1323,9 @@ dependencies = [
 
 [[package]]
 name = "evalexpr"
-version = "11.1.0"
+version = "11.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e757e796a66b54d19fa26de38e75c3351eb7a3755c85d7d181a8c61437ff60c"
+checksum = "d4c66d3694d06f23490e33b7d5d22368c1f0bc24423b61cfba4bb1b100fc55ef"
 
 [[package]]
 name = "factor"
@@ -1877,9 +1877,9 @@ dependencies = [
 
 [[package]]
 name = "itertools"
-version = "0.11.0"
+version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1c173a5686ce8bfa551b3563d0c2170bf24ca44da99c7ca4bfdab5418c3fe57"
+checksum = "25db6b064527c5d482d0423354fcd07a89a2dfe07b67892e62411946db7f07b0"
 dependencies = [
  "either",
 ]
@@ -2520,9 +2520,9 @@ dependencies = [
 
 [[package]]
 name = "pathfinding"
-version = "4.3.2"
+version = "4.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b7d06c8716de428def400ae9e5cd92463cd458d98169ed835b2da5d08cf4698"
+checksum = "a373a9925b8361b790cf53bc286dbc87736335427537ff438f53445eb41a526d"
 dependencies = [
  "deprecate-until",
  "fixedbitset",
@@ -3653,9 +3653,9 @@ dependencies = [
 
 [[package]]
 name = "test-case"
-version = "3.2.1"
+version = "3.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8f1e820b7f1d95a0cdbf97a5df9de10e1be731983ab943e56703ac1b8e9d425"
+checksum = "eb2550dd13afcd286853192af8601920d959b14c401fcece38071d53bf0768a8"
 dependencies = [
  "test-case-macros",
 ]
@@ -4031,9 +4031,9 @@ dependencies = [
 
 [[package]]
 name = "uuid"
-version = "1.5.0"
+version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "88ad59a7560b41a70d191093a945f0b87bc1deeda46fb237479708a1d6b6cdfc"
+checksum = "5e395fcf16a7a3d8127ec99782007af141946b4795001f876d54fb0d55978560"
 
 [[package]]
 name = "variance"
