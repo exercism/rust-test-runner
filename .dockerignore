@@ -4,6 +4,7 @@
 .gitignore
 Dockerfile
 target/
+local-registry/target/
 **/*.rs.bk
 report.json
 results.json
