@@ -1,6 +1,7 @@
 pub mod cargo_test;
 pub mod output;
 pub mod test_name_formatter;
+pub mod cli;
 
 use cargo_test as ct;
 use output as o;
