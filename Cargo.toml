@@ -2,7 +2,7 @@
 name = "rust_test_runner"
 version = "0.1.0"
 authors = ["Peter Goodspeed-Niklaus <peter.r.goodspeedniklaus@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 serde_json = "1.0"
