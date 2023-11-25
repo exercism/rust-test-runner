@@ -1,5 +1,5 @@
-use transform_output::cargo_test::TestEvent;
-use transform_output::convert;
+use rust_test_runner::cargo_test::TestEvent;
+use rust_test_runner::convert;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let stdin = std::io::stdin();

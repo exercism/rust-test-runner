@@ -90,7 +90,7 @@ RUN set -eux; \
 ENV wd /opt/test-runner
 RUN mkdir -p ${wd}/bin
 WORKDIR ${wd}
-COPY --from=build /rust-test-runner/target/release/transform-output bin
+COPY --from=build /rust-test-runner/target/release/rust_test_runner bin
 COPY --from=build /usr/local/bin/jq /usr/local/bin
 # configure local-registry
 COPY --from=build /local-registry local-registry/
