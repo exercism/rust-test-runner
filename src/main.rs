@@ -13,6 +13,8 @@ fn main() -> Result<()> {
     let cli_args = CliArgs::parse();
     let output_dir = cli_args
         .output_dir
+        .as_ref()
+        .unwrap_or(&cli_args.input_dir)
         .canonicalize()
         .context("failed to canonicalize output dir")?;
 

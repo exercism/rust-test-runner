@@ -6,5 +6,5 @@ use clap::Parser;
 pub struct CliArgs {
     pub slug: String,
     pub input_dir: PathBuf,
-    pub output_dir: PathBuf,
+    pub output_dir: Option<PathBuf>,
 }
