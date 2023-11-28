@@ -3,7 +3,7 @@
 /// ### Example
 ///
 /// ```rust
-/// use transform_output::test_name_formatter::format_test_name;
+/// use rust_test_runner::test_name_formatter::format_test_name;
 ///
 /// let input = String::from("test___cast_spell_with_insufficient_mana");
 /// let output = String::from("Cast spell with insufficient mana");

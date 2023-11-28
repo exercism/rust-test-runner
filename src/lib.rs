@@ -1,4 +1,5 @@
 pub mod cargo_test;
+pub mod cli;
 pub mod output;
 pub mod test_name_formatter;
 
