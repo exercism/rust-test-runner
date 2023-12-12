@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "status": "fail",
+  "message": null,
+  "tests": [
+    {
+      "name": "Is five",
+      "status": "fail",
+      "message": "thread 'is_five' panicked at 'assertion failed: `(left == right)`\n  left: `4`,\n right: `5`', tests/two_plus_two.rs:10:5\n",
+      "output": "I am here...\n"
+    },
+    {
+      "name": "Is four",
+      "status": "pass",
+      "message": null
+    }
+  ]
+}
