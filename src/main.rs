@@ -11,6 +11,10 @@ use serde_json as json;
 
 fn main() -> Result<()> {
     let cli_args = CliArgs::parse();
+    let input_dir = cli_args
+        .input_dir
+        .canonicalize()
+        .context("failed to canonicalize input dir")?;
     let output_dir = cli_args
         .output_dir
         .as_ref()
@@ -18,8 +22,10 @@ fn main() -> Result<()> {
         .canonicalize()
         .context("failed to canonicalize output dir")?;
 
-    std::env::set_current_dir(&cli_args.input_dir)
-        .context("failed to 'cd' into the input directory")?;
+    let mut irrelevant_path_prefix = input_dir.parent().unwrap().display().to_string();
+    irrelevant_path_prefix.push('/');
+
+    std::env::set_current_dir(&input_dir).context("failed to 'cd' into the input directory")?;
 
     let mut results_out = String::new();
 
@@ -31,7 +37,7 @@ fn main() -> Result<()> {
             .push_str("WARNING: student did not upload Cargo.toml. This may cause build errors.\n");
     }
 
-    let profile = determine_profile(&cli_args.input_dir)
+    let profile = determine_profile(&input_dir)
         .context("failed to determine the compilation profile of the solution")?;
 
     #[rustfmt::skip]
@@ -79,6 +85,9 @@ fn main() -> Result<()> {
             results_out.escape_default()
         );
     }
+
+    // only display relative path in output to students
+    results_json = results_json.replace(&irrelevant_path_prefix, "");
 
     std::fs::write(output_dir.join("results.json"), results_json)
         .context("failed to write results.json")?;
