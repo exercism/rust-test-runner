@@ -1,5 +1,5 @@
 # always build this using the latest stable release
-FROM rust:1.71.0 as build
+FROM rust:1.74.1 as build
 
 
 ARG JQ_VERSION=1.6
@@ -41,7 +41,7 @@ RUN cargo generate-lockfile && cargo local-registry --sync Cargo.lock .
 # version tag with a nightly one, pinned to a specific date.
 
 # official Dockerfile source: 
-# https://github.com/rust-lang/docker-rust/blob/master/1.71.0/bookworm/slim/Dockerfile
+# https://github.com/rust-lang/docker-rust/blob/master/1.74.1/bookworm/slim/Dockerfile
 
 ################ start-copy-pasta ################
 
@@ -50,7 +50,7 @@ FROM debian:bookworm-slim
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
-    RUST_VERSION=nightly-2023-07-18
+    RUST_VERSION=nightly-2023-12-12
 #                ~~~~~~~~^~~~~~~~~~
 #                 pin version here
 
