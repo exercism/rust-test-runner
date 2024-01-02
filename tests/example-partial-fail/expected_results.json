@@ -16,12 +16,12 @@
     {
       "name": "Early years",
       "status": "fail",
-      "message": "thread 'test_early_years' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\n"
+      "message": "thread 'test_early_years' panicked at tests/leap.rs:2:5:\nassertion `left == right` failed\n  left: false\n right: true\n"
     },
     {
       "name": "Exceptional centuries",
       "status": "fail",
-      "message": "thread 'test_exceptional_centuries' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\n"
+      "message": "thread 'test_exceptional_centuries' panicked at tests/leap.rs:2:5:\nassertion `left == right` failed\n  left: false\n right: true\n"
     },
     {
       "name": "Year divisible by 100 but not by 3 is still not a leap year",
@@ -56,12 +56,12 @@
     {
       "name": "Year divisible by 400 but not by 125 is still a leap year",
       "status": "fail",
-      "message": "thread 'test_year_divisible_by_400_but_not_by_125_is_still_a_leap_year' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\n"
+      "message": "thread 'test_year_divisible_by_400_but_not_by_125_is_still_a_leap_year' panicked at tests/leap.rs:2:5:\nassertion `left == right` failed\n  left: false\n right: true\n"
     },
     {
       "name": "Year divisible by 400 leap year",
       "status": "fail",
-      "message": "thread 'test_year_divisible_by_400_leap_year' panicked at 'assertion failed: `(left == right)`\n  left: `false`,\n right: `true`', tests/leap.rs:2:5\n"
+      "message": "thread 'test_year_divisible_by_400_leap_year' panicked at tests/leap.rs:2:5:\nassertion `left == right` failed\n  left: false\n right: true\n"
     },
     {
       "name": "Year not divisible by 4 common year",
@@ -71,7 +71,7 @@
     {
       "name": "Years 1600 to 1699",
       "status": "fail",
-      "message": "thread 'test_years_1600_to_1699' panicked at 'incorrect result for years: [1600]', tests/leap.rs:98:9\n"
+      "message": "thread 'test_years_1600_to_1699' panicked at tests/leap.rs:98:9:\nincorrect result for years: [1600]\n"
     }
   ]
 }
