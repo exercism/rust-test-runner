@@ -1,0 +1,7 @@
+[package]
+name = "example-missing-crate"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lets-hope-nobody-publishes-a-crate-with-a-silly-name-like-this = "*"

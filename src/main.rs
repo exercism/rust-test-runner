@@ -80,10 +80,17 @@ fn main() -> Result<()> {
             r#"{"version": 2, "status": "error", "message": "One of the tests timed out"}"#,
         );
     } else if results_json.contains("probable build failure") {
-        results_json = format!(
-            r#"{{"version": 2, "status": "error", "message": "{}"}}"#,
-            results_out.escape_default()
-        );
+        if results_out.contains("error: no matching package named") {
+            results_json = format!(
+                r#"{{"version": 2, "status": "error", "message": "{}"}}"#,
+                escape(MISSING_CRATE_ERR_MSG)
+            );
+        } else {
+            results_json = format!(
+                r#"{{"version": 2, "status": "error", "message": "{}"}}"#,
+                escape(&results_out)
+            );
+        }
     }
 
     // only display relative path in output to students
@@ -118,3 +125,22 @@ fn determine_profile(input_dir: &Path) -> Result<&'static str> {
         Ok("dev")
     }
 }
+
+fn escape(s: &str) -> String {
+    // escape_default turns "'" into "\'" which is incorrect in json
+    // and needs to be reverted
+    s.escape_default().to_string().replace("\\'", "'")
+}
+
+static MISSING_CRATE_ERR_MSG: &str = "\
+It looks like you're using a crate which isn't supported by our test runner.
+Please see the file at the below URL to check which ones are supported.
+Please get in touch if you think your crate should be included
+or something else about the user experience could be improved.
+
+List of available crates:
+https://github.com/exercism/rust-test-runner/blob/main/local-registry/Cargo.toml
+
+Exercism forum (Rust topic):
+https://forum.exercism.org/c/programming/rust
+";
