@@ -665,7 +665,6 @@ dependencies = [
  "itertools 0.13.0",
  "itoa",
  "kmp",
- "lazy_static",
  "linked-hash-map",
  "linked_hash_set",
  "maplit",
@@ -685,7 +684,6 @@ dependencies = [
  "num_cpus",
  "num_enum",
  "numtoa",
- "once_cell",
  "pest",
  "pest_derive",
  "phf",
@@ -716,6 +714,7 @@ dependencies = [
  "unic-segment",
  "unicase",
  "unicode-normalization",
+ "unicode-reverse",
  "unicode-segmentation",
  "unzip-n",
  "uuid",
@@ -2504,6 +2503,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a56d1686db2308d901306f92a263857ef59ea39678a5458e7cb17f01415101f5"
 dependencies = [
  "tinyvec",
+]
+
+[[package]]
+name = "unicode-reverse"
+version = "1.0.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4b6f4888ebc23094adfb574fdca9fdc891826287a6397d2cd28802ffd6f20c76"
+dependencies = [
+ "unicode-segmentation",
 ]
 
 [[package]]
