@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "status": "error",
+  "message": "It looks like you're using a crate which isn't supported by our test runner.\nPlease see the file at the below URL to check which ones are supported.\nPlease get in touch if you think your crate should be included\nor something else about the user experience could be improved.\n\nList of available crates:\nhttps://github.com/exercism/rust-test-runner/blob/main/local-registry/Cargo.toml\n\nExercism forum (Rust topic):\nhttps://forum.exercism.org/c/programming/rust\n"
+}
