@@ -133,9 +133,9 @@ fn escape(s: &str) -> String {
 }
 
 static MISSING_CRATE_ERR_MSG: &str = "\
-It looks like you're using a crate which isn't supported by our test runner.
-Please see the file at the below URL to check which ones are supported.
-Please get in touch if you think your crate should be included
+It looks like you're using a crate which isn't supported by our test runner. \
+Please see the file at the below URL to check which ones are supported. \
+Please get in touch if you think your crate should be included \
 or something else about the user experience could be improved.
 
 List of available crates:
