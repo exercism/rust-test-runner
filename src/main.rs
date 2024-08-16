@@ -6,7 +6,7 @@ use clap::Parser;
 use regex::Regex;
 use rust_test_runner::cargo_test::TestEvent;
 use rust_test_runner::cli::CliArgs;
-use rust_test_runner::convert;
+use rust_test_runner::{convert, parse_test_code};
 use serde_json as json;
 
 fn main() -> Result<()> {
@@ -70,8 +70,13 @@ fn main() -> Result<()> {
 
     results_out.push_str(&deterministic_cargo_stderr);
 
+    let test_file = std::fs::read_to_string(format!("tests/{}.rs", cli_args.slug))
+        .context("failed to read test file for test_code parsing")?;
+    let name_to_code = parse_test_code::parse_file(&test_file);
+
     let out = convert(
         serde_json::Deserializer::from_slice(&cargo_output.stdout).into_iter::<TestEvent>(),
+        name_to_code,
     );
     let mut results_json = serde_json::to_string_pretty(&out)?;
 
