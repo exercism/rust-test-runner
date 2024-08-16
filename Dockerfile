@@ -1,12 +1,17 @@
 # always build this using the latest stable release
-FROM rust:1.80.0 as build
-
+FROM rust:1.80.0 AS build-base
 
 ARG JQ_VERSION=1.6
 ARG JQ_URL=https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64
+# download jq
+RUN curl -L -o /usr/local/bin/jq "${JQ_URL}" \
+    && chmod +x /usr/local/bin/jq
 
 # install cargo-local-registry dependencies
 RUN apt-get update && apt-get install -y gcc openssl cmake
+
+
+FROM build-base AS build-rust-test-runner
 
 RUN mkdir -p /rust-test-runner/src
 ENV wd /rust-test-runner
@@ -22,15 +27,17 @@ RUN rm src/lib.rs
 COPY src/* src/
 # build the executable
 RUN cargo build --release
-# download jq
-RUN curl -L -o /usr/local/bin/jq "${JQ_URL}" \
-    && chmod +x /usr/local/bin/jq
+
+
+FROM build-base AS build-cargo-local-registry
+
 # install cargo-local-registry
 RUN cargo install cargo-local-registry
 # download popular crates to local registry
 WORKDIR /local-registry
 COPY local-registry/* ./
 RUN cargo generate-lockfile && cargo local-registry --sync Cargo.lock .
+
 
 # As of Dec 2019, we need to use the nightly toolchain to get JSON test output
 # tracking issue: https://github.com/rust-lang/rust/issues/49359
@@ -92,10 +99,10 @@ RUN set -eux; \
 ENV wd /opt/test-runner
 RUN mkdir -p ${wd}/bin
 WORKDIR ${wd}
-COPY --from=build /rust-test-runner/target/release/rust_test_runner bin
-COPY --from=build /usr/local/bin/jq /usr/local/bin
+COPY --from=build-rust-test-runner /rust-test-runner/target/release/rust_test_runner bin
+COPY --from=build-base /usr/local/bin/jq /usr/local/bin
+COPY --from=build-cargo-local-registry /local-registry local-registry/
 # configure local-registry
-COPY --from=build /local-registry local-registry/
 RUN echo '[source.crates-io]\n\
     registry = "https://github.com/rust-lang/crates.io-index"\n\
     replace-with = "local-registry"\n\
