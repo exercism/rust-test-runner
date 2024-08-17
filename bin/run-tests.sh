@@ -18,7 +18,11 @@ exit_code=0
 for test_dir in tests/*; do
     test_dir_name=$(basename "${test_dir}")
     test_dir_path=$(realpath "${test_dir}")
-    test_file_path=$test_dir_path/tests/$(ls "$test_dir_path/tests/")
+    if [ -d "$test_dir_path/tests" ] ; then
+        test_file_path=$test_dir_path/tests/$(ls "$test_dir_path/tests/")
+    else
+        test_file_path=$test_dir_path
+    fi
     test_file_name=$(basename "$test_file_path")
     slug=${test_file_name%.*}
     results_file_path="${test_dir_path}/results.json"
