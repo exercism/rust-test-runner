@@ -70,8 +70,10 @@ fn main() -> Result<()> {
 
     results_out.push_str(&deterministic_cargo_stderr);
 
-    let test_file = std::fs::read_to_string(format!("tests/{}.rs", cli_args.slug))
-        .context("failed to read test file for test_code parsing")?;
+    // if there is no test file at the standard location (tests/<slug>.rs),
+    // pretend like the test file is empty
+    let test_file =
+        std::fs::read_to_string(format!("tests/{}.rs", cli_args.slug)).unwrap_or_default();
     let name_to_code = parse_test_code::parse_file(&test_file);
 
     let out = convert(
