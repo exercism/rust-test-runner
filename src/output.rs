@@ -12,6 +12,7 @@ pub enum Status {
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TestResult {
     pub name: String,
+    pub test_code: String,
     pub status: Status,
     pub message: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -19,16 +20,17 @@ pub struct TestResult {
 }
 
 impl TestResult {
-    pub fn ok(name: String) -> TestResult {
+    pub fn ok(name: String, test_code: String) -> TestResult {
         TestResult {
             name: format_test_name(name),
+            test_code,
             status: Status::Pass,
             message: None,
             output: None,
         }
     }
 
-    pub fn fail(name: String, message: Option<String>) -> TestResult {
+    pub fn fail(name: String, test_code: String, message: Option<String>) -> TestResult {
         let name = format_test_name(name);
 
         let (output, message) = match message.as_ref().and_then(|m| m.split_once("thread '")) {
@@ -52,6 +54,7 @@ impl TestResult {
 
         TestResult {
             name,
+            test_code,
             message,
             status: Status::Fail,
             output,

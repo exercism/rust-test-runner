@@ -18,6 +18,13 @@ exit_code=0
 for test_dir in tests/*; do
     test_dir_name=$(basename "${test_dir}")
     test_dir_path=$(realpath "${test_dir}")
+    if [ -d "$test_dir_path/tests" ] ; then
+        test_file_path=$test_dir_path/tests/$(ls "$test_dir_path/tests/")
+    else
+        test_file_path=$test_dir_path
+    fi
+    test_file_name=$(basename "$test_file_path")
+    slug=${test_file_name%.*}
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
 
@@ -25,7 +32,7 @@ for test_dir in tests/*; do
     rm -rf "${test_dir_path}/target"
     rm -f "${test_dir_path}/Cargo.lock"
 
-    bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
+    bin/run.sh "${slug}" "${test_dir_path}" "${test_dir_path}"
 
     # Normalize the results file
     jq 'if (.tests != null) then .tests |= sort_by(.name) else . end' "${results_file_path}" > tmp && mv tmp "${results_file_path}"

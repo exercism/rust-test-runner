@@ -5,12 +5,14 @@
   "tests": [
     {
       "name": "Is five",
+      "test_code": "assert_eq!(two_plus_two(), 5);",
       "status": "fail",
       "message": "thread 'is_five' panicked at tests/two_plus_two.rs:10:5:\nassertion `left == right` failed\n  left: 4\n right: 5\n",
       "output": "I am here...\n"
     },
     {
       "name": "Is four",
+      "test_code": "assert_eq!(two_plus_two(), 4);",
       "status": "pass",
       "message": null
     }

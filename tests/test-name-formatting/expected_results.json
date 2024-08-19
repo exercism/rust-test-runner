@@ -5,56 +5,67 @@
   "tests": [
     {
       "name": "Extra underscore",
+      "test_code": "let input = String::from(\"test___cast_spell_with_insufficient_mana\");\nlet output = String::from(\"Cast spell with insufficient mana\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Extra underscore at beginning",
+      "test_code": "let input = String::from(\"__test_using_ascii_value_for_doubled_nondigit_isnt_allowed\");\nlet output = String::from(\"Using ascii value for doubled nondigit isnt allowed\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Extra underscore middle",
+      "test_code": "let input =\n    String::from(\"test_valid_strings_with____a_nondigit_added_at_the_end_become_invalid\");\nlet output = String::from(\"Valid strings with a nondigit added at the end become invalid\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "No test prefix",
+      "test_code": "let input = String::from(\"to_quadruple_byte\");\nlet output = String::from(\"To quadruple byte\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Regular test name",
+      "test_code": "let input = String::from(\"test_year_divisible_by_400_but_not_by_125_is_still_a_leap_year\");\nlet output = String::from(\"Year divisible by 400 but not by 125 is still a leap year\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Remove multiple underscores and whitespaces",
+      "test_code": "let input = String::from(\"_ _ _apple_ _ _\");\nlet output = String::from(\"Apple\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Several extra whitespaces",
+      "test_code": "let input =\n    String::from(\"test_invalid _char _in _middle _with_sum_divisible_by_10_isnt_allowed\");\nlet output = String::from(\"Invalid char in middle with sum divisible by 10 isnt allowed\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Short name",
+      "test_code": "let input = String::from(\"from_bytes\");\nlet output = String::from(\"From bytes\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Trailing extra underscore",
+      "test_code": "let input = String::from(\"test_cast_large_spell_with_no_mana_pool__\");\nlet output = String::from(\"Cast large spell with no mana pool\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Trailing whitespace",
+      "test_code": "let input = String::from(\"test_reviving_dead_level9_player  \");\nlet output = String::from(\"Reviving dead level9 player\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Uppercase in the middle with multiple underscores",
+      "test_code": "let input =\n    String::from(\"test__Valid_strIngs_wIth_nuMeric__Unicode_charActers_become__invaliD\");\nlet output = String::from(\"Valid strings with numeric unicode characters become invalid\");\nassert_eq!(formatter::format_test_name(input), output);",
       "status": "pass",
       "message": null
     }

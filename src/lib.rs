@@ -1,13 +1,16 @@
 pub mod cargo_test;
 pub mod cli;
 pub mod output;
+pub mod parse_test_code;
 pub mod test_name_formatter;
+
+use std::collections::HashMap;
 
 use cargo_test as ct;
 use output as o;
 
 /// convert a stream of test events into a single test result
-pub fn convert<I, E>(events: I) -> o::Output
+pub fn convert<I, E>(events: I, name_to_code: HashMap<String, String>) -> o::Output
 where
     I: Iterator<Item = Result<ct::TestEvent, E>>,
     E: serde::de::Error + std::fmt::Display,
@@ -38,6 +41,11 @@ where
                 break;
             }
         };
+        let test_code = name_to_code
+            .get(&name)
+            .map(String::as_str)
+            .unwrap_or(TEST_CODE_NOT_FOUND_MSG)
+            .to_string();
         match event.event {
             ct::Event::Started => continue,
             ct::Event::Ok => {
@@ -46,12 +54,13 @@ where
                     out.status = o::Status::Pass;
                 }
                 out.message = None;
-                out.tests.push(o::TestResult::ok(name));
+                out.tests.push(o::TestResult::ok(name, test_code));
             }
             ct::Event::Failed => {
                 out.status = o::Status::Fail;
                 out.message = None;
-                out.tests.push(o::TestResult::fail(name, event.stdout));
+                out.tests
+                    .push(o::TestResult::fail(name, test_code, event.stdout));
             }
             ct::Event::Ignored => {
                 out.status = o::Status::Error;
@@ -62,6 +71,13 @@ where
     }
     out
 }
+
+static TEST_CODE_NOT_FOUND_MSG: &str = "\
+It looks like the test runner failed to retrieve the code for this test. \
+Please consider reporting this on the forum so we can try to fix it. \
+Thanks!
+
+https://forum.exercism.org/c/programming/rust/112";
 
 #[cfg(test)]
 mod test {
@@ -80,8 +96,10 @@ mod test {
 
     #[test]
     fn test_convert() {
-        let out =
-            convert(serde_json::Deserializer::from_str(TEST_DATA).into_iter::<ct::TestEvent>());
+        let out = convert(
+            serde_json::Deserializer::from_str(TEST_DATA).into_iter::<ct::TestEvent>(),
+            HashMap::new(),
+        );
         assert_eq!(out.status, o::Status::Fail);
         for test in out.tests {
             if test.name == "Test::fail" {

@@ -5,71 +5,85 @@
   "tests": [
     {
       "name": "Any old year",
+      "test_code": "process_leapyear_case(1997, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Century",
+      "test_code": "process_leapyear_case(1700, false);\nprocess_leapyear_case(1800, false);\nprocess_leapyear_case(1900, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Early years",
+      "test_code": "process_leapyear_case(1, false);\nprocess_leapyear_case(4, true);\nprocess_leapyear_case(100, false);\nprocess_leapyear_case(400, true);\nprocess_leapyear_case(900, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Exceptional centuries",
+      "test_code": "process_leapyear_case(1600, true);\nprocess_leapyear_case(2000, true);\nprocess_leapyear_case(2400, true);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 100 but not by 3 is still not a leap year",
+      "test_code": "process_leapyear_case(1900, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 100 not divisible by 400 common year",
+      "test_code": "process_leapyear_case(2100, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 2 not divisible by 4 in common year",
+      "test_code": "process_leapyear_case(1970, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 200 not divisible by 400 common year",
+      "test_code": "process_leapyear_case(1800, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 4 and 5 is still a leap year",
+      "test_code": "process_leapyear_case(1960, true);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 4 not divisible by 100 leap year",
+      "test_code": "process_leapyear_case(1996, true);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 400 but not by 125 is still a leap year",
+      "test_code": "process_leapyear_case(2400, true);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year divisible by 400 leap year",
+      "test_code": "process_leapyear_case(2000, true);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Year not divisible by 4 common year",
+      "test_code": "process_leapyear_case(2015, false);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Years 1600 to 1699",
+      "test_code": "let incorrect_years = (1600..1700)\n    .filter(|&year| leap::is_leap_year(year) != (year % 4 == 0))\n    .collect::<Vec<_>>();\n\nif !incorrect_years.is_empty() {\n    panic!(\"incorrect result for years: {:?}\", incorrect_years);\n}",
       "status": "pass",
       "message": null
     }

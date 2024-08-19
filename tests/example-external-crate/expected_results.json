@@ -5,26 +5,31 @@
   "tests": [
     {
       "name": "Another date",
+      "test_code": "let start_date = dt(1977, 6, 13, 0, 0, 0);\n\nassert_eq!(gigasecond::after(start_date), dt(2009, 2, 19, 1, 46, 40));",
       "status": "pass",
       "message": null
     },
     {
       "name": "Another datetime",
+      "test_code": "let start_date = dt(2015, 1, 24, 23, 59, 59);\n\nassert_eq!(gigasecond::after(start_date), dt(2046, 10, 3, 1, 46, 39));",
       "status": "pass",
       "message": null
     },
     {
       "name": "Date",
+      "test_code": "let start_date = dt(2011, 4, 25, 0, 0, 0);\n\nassert_eq!(gigasecond::after(start_date), dt(2043, 1, 1, 1, 46, 40));",
       "status": "pass",
       "message": null
     },
     {
       "name": "Datetime",
+      "test_code": "let start_date = dt(2015, 1, 24, 22, 0, 0);\n\nassert_eq!(gigasecond::after(start_date), dt(2046, 10, 2, 23, 46, 40));",
       "status": "pass",
       "message": null
     },
     {
       "name": "Third date",
+      "test_code": "let start_date = dt(1959, 7, 19, 0, 0, 0);\n\nassert_eq!(gigasecond::after(start_date), dt(1991, 3, 27, 1, 46, 40));",
       "status": "pass",
       "message": null
     }
