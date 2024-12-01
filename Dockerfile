@@ -32,7 +32,7 @@ RUN cargo build --release
 FROM build-base AS build-cargo-local-registry
 
 # install cargo-local-registry
-RUN cargo install cargo-local-registry
+RUN cargo install --locked cargo-local-registry
 # download popular crates to local registry
 WORKDIR /local-registry
 COPY local-registry/* ./
