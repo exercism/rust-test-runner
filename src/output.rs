@@ -33,11 +33,11 @@ impl TestResult {
     pub fn fail(name: String, test_code: String, message: Option<String>) -> TestResult {
         let name = format_test_name(name);
 
-        let (output, message) = match message.as_ref().and_then(|m| m.split_once("thread '")) {
+        let (output, message) = match message.as_ref().and_then(|m| m.split_once("\nthread '")) {
             Some((output, message)) if !output.is_empty() => {
                 (Some(output.to_owned()), Some(format!("thread '{message}")))
             }
-            _ => (None, message),
+            _ => (None, message.map(|m| m.trim_start().to_owned())),
         };
 
         // This note is attached to the error message of only one test case that fails,
