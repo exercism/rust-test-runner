@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
 
       - name: Check if track dependencies are up to date
-        run: cargo test --package track_deps_are_up_to_date
+        run: cd track_deps_are_up_to_date && cargo test

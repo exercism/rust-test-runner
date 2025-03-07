@@ -1,6 +1,3 @@
-[workspace]
-members = ["track_deps_are_up_to_date"]
-
 [package]
 name = "rust_test_runner"
 version = "0.1.0"
