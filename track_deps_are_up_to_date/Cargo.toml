@@ -1,0 +1,12 @@
+[package]
+name = "track_deps_are_up_to_date"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[dev-dependencies]
+cmd_lib = "1.9.5"
+glob = "0.3.2"
+serde = "1.0.218"
+toml = "0.8.20"
