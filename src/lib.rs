@@ -77,7 +77,7 @@ It looks like the test runner failed to retrieve the code for this test. \
 Please consider reporting this on the forum so we can try to fix it. \
 Thanks!
 
-https://forum.exercism.org/c/programming/rust/112";
+https://forum.exercism.org/c/exercism/bugs-and-features/126";
 
 #[cfg(test)]
 mod test {
