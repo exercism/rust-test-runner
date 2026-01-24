@@ -69,6 +69,7 @@ where
             }
         }
     }
+    out.tests.sort();
     out
 }
 

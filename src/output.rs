@@ -62,6 +62,22 @@ impl TestResult {
     }
 }
 
+impl PartialOrd for TestResult {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for TestResult {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        match self.name.cmp(&other.name) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        self.test_code.cmp(&other.test_code)
+    }
+}
+
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Output {
     pub version: u8,
