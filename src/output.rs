@@ -1,4 +1,7 @@
+use std::sync::LazyLock;
+
 use crate::test_name_formatter::format_test_name;
+use regex::Regex;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -18,6 +21,9 @@ pub struct TestResult {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub output: Option<String>,
 }
+
+static THREAD_PANICKED_REGEX: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"thread '(?<testname>.*)' \(.*\) panicked at").unwrap());
 
 impl TestResult {
     pub fn ok(name: String, test_code: String) -> TestResult {
@@ -40,16 +46,19 @@ impl TestResult {
             _ => (None, message.map(|m| m.trim_start().to_owned())),
         };
 
-        // This note is attached to the error message of only one test case that fails,
-        // but not always the same one. To avoid CI failing unnecessarily, this note
-        // is stripped from all messages.
-        // It's also not useful to students reading the output of the test runner,
-        // as they can't set this environment variable in the test runner themselves.
         let message = message.map(|m| {
-            m.trim_end_matches(
+            // This note is attached to the error message of only one test case that fails,
+            // but not always the same one. To avoid CI failing unnecessarily, this note
+            // is stripped from all messages.
+            // It's also not useful to students reading the output of the test runner,
+            // as they can't set this environment variable in the test runner themselves.
+            let m = m.trim_end_matches(
                 "note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
-            )
-            .to_owned()
+            );
+            // If the test panics, the message contains a thread number that's
+            // not deterministic. Strip it to improve test reliability.
+            let m = THREAD_PANICKED_REGEX.replace(m, "thread '$testname' panicked at");
+            m.to_string()
         });
 
         TestResult {
@@ -59,6 +68,22 @@ impl TestResult {
             status: Status::Fail,
             output,
         }
+    }
+}
+
+impl PartialOrd for TestResult {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for TestResult {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        match self.name.cmp(&other.name) {
+            core::cmp::Ordering::Equal => {}
+            ord => return ord,
+        }
+        self.test_code.cmp(&other.test_code)
     }
 }
 
