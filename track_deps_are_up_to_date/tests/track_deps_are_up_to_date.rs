@@ -39,18 +39,31 @@ fn track_deps_are_up_to_date() {
         let deps = manifest["dependencies"].as_table().unwrap();
 
         for (name, version) in deps {
-            let Some(available_version) = available_deps.get(name) else {
-                panic!("{exercise:?} is using a dependency that's not available: {name}")
-            };
             let (major, minor) = parse_semver(version.as_str().unwrap());
-            let (av_major, av_minor) = parse_semver(available_version.as_str().unwrap());
 
-            if major != av_major {
-                panic!("{exercise:?} depends on {name} v{major}, but only v{av_major} is available")
-            } else if major == 0 && minor != av_minor {
-                panic!(
-                    "{exercise:?} depends on {name} v0.{minor}, but only v0.{av_minor} is available"
-                )
+            if available_deps
+                .iter()
+                .filter_map(|(k, v)| {
+                    if k == name {
+                        return Some(v);
+                    }
+                    if k.starts_with(name)
+                        && let Some(table) = v.as_table()
+                    {
+                        return table.get("version");
+                    }
+                    None
+                })
+                .map(|v| parse_semver(v.as_str().unwrap()))
+                .any(|(av_major, av_minor)| {
+                    major != 0 && major == av_major || major == 0 && minor == av_minor
+                })
+            {
+                continue;
+            } else if major != 0 {
+                panic!("{exercise:?} depends on {name} v{major}, which is not available")
+            } else {
+                panic!("{exercise:?} depends on {name} v0.{minor}, which is not available")
             }
         }
     }
