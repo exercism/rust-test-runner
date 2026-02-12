@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y gcc openssl cmake
 FROM build-base AS build-rust-test-runner
 
 RUN mkdir -p /rust-test-runner/src
-ENV wd /rust-test-runner
+ENV wd=/rust-test-runner
 WORKDIR ${wd}
 COPY Cargo.* ./
 # for caching, we want to download and build all the dependencies before copying
@@ -129,7 +129,7 @@ RUN set -eux; \
 
 ################ end-copy-pasta ################
 
-ENV wd /opt/test-runner
+ENV wd=/opt/test-runner
 RUN mkdir -p ${wd}/bin
 WORKDIR ${wd}
 COPY --from=build-rust-test-runner /rust-test-runner/target/release/rust_test_runner bin
