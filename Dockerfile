@@ -1,5 +1,5 @@
 # always build this using the latest stable release
-FROM rust:1.94.0 AS build-base
+FROM rust:1.95.0 AS build-base
 
 ARG JQ_VERSION=1.6
 ARG JQ_URL=https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64
@@ -59,7 +59,7 @@ LABEL org.opencontainers.image.source=https://github.com/rust-lang/docker-rust
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
-    RUST_VERSION=nightly-2026-03-05
+    RUST_VERSION=nightly-2026-04-17
 #                ~~~~~~~~^~~~~~~~~~
 #                 pin version here
 
