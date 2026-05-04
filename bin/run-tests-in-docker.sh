@@ -3,7 +3,7 @@
 set -e
 
 # Synopsis:
-# Test the test runner Docker image by running it against a predefined set of 
+# Test the test runner Docker image by running it against a predefined set of
 # solutions with an expected output.
 # The test runner Docker image is built automatically.
 
@@ -14,6 +14,23 @@ set -e
 # Example:
 # ./bin/run-tests-in-docker.sh
 
+mnt_opt=""
+run_opt=""
+if ! command -v docker > /dev/null ; then
+    if ! command -v podman > /dev/null ; then
+        echo "Docker or Podman must be installed to run the tests in a container."
+        exit 1
+    fi
+    # Docker is unavailable, use Podman
+    docker() {
+        podman "$@"
+    }
+    # for SELinux systems, permit container access to mounted directories
+    mnt_opt=",Z"
+    # use same user ID for container, avoids file ownership problems
+    run_opt="--userns=keep-id"
+fi
+
 # Build the Docker image
 docker build --rm -t exercism/rust-test-runner .
 
@@ -21,9 +38,10 @@ docker build --rm -t exercism/rust-test-runner .
 docker run \
     --rm \
     --network none \
-    --mount type=bind,src="${PWD}/tests",dst=/opt/test-runner/tests \
+    --mount type=bind,src="${PWD}/tests,dst=/opt/test-runner/tests$mnt_opt" \
     --mount type=tmpfs,dst=/tmp \
-    --volume "${PWD}/bin/run-tests.sh:/opt/test-runner/bin/run-tests.sh" \
+    --mount type=bind,src="${PWD}/bin/run-tests.sh,dst=/opt/test-runner/bin/run-tests.sh$mnt_opt" \
+    $run_opt \
     --workdir /opt/test-runner \
     --entrypoint /opt/test-runner/bin/run-tests.sh \
     exercism/rust-test-runner

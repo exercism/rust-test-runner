@@ -35,7 +35,7 @@ for test_dir in tests/*; do
     bin/run.sh "${slug}" "${test_dir_path}" "${test_dir_path}"
 
     # Normalize the results file
-    jq 'if (.tests != null) then .tests |= sort_by(.name) else . end' "${results_file_path}" > tmp && mv tmp "${results_file_path}"
+    jq 'if (.tests != null) then .tests |= sort_by(.name) else . end' "${results_file_path}" > /tmp/res && mv /tmp/res "${results_file_path}"
     sed -i -e 's/warning: build failed, waiting for other jobs to finish.*//' "${results_file_path}"
 
     echo "${test_dir_name}: comparing results.json to expected_results.json"
