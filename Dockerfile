@@ -6,7 +6,7 @@
 # to keep this in sync between the two images. A slight mismatch in these layers
 # would lead to douple the storage requirement on Exercism's servers.
 
-FROM rust:1.95.0-trixie@sha256:a9cfb755b33f5bb872610cbdb25da61f527416b28fc9c052bbce4bef93e7799a AS build-local-registry
+FROM rust:1.95.0-trixie AS build-local-registry
 
 WORKDIR /work
 COPY local-registry/Cargo.toml .
@@ -46,7 +46,7 @@ EOF
 ############################## END SHARED LAYERS ##############################
 
 
-FROM rust:1.95.0-trixie@sha256:a9cfb755b33f5bb872610cbdb25da61f527416b28fc9c052bbce4bef93e7799a AS build
+FROM rust:1.95.0-trixie AS build
 
 WORKDIR /work
 COPY Cargo.* ./
