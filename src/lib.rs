@@ -21,6 +21,7 @@ where
         message: Some("no tests detected; probable build failure".into()),
         tests: Vec::new(),
     };
+    let mut doctest_cache = HashMap::new();
     for (idx, event) in events.enumerate() {
         let event = match event {
             Err(e) => {
@@ -39,11 +40,58 @@ where
                 break;
             }
         };
-        let test_code = name_to_code
-            .get(&name)
-            .map(String::as_str)
-            .unwrap_or(TEST_CODE_NOT_FOUND_MSG)
-            .to_string();
+        let (name, test_code) = if name.contains("src/") {
+            // We're dealing with a doctest, those contain "src/" in their name.
+            //
+            // example name:
+            // "macros/src/compile_fail_tests.rs - compile_fail_tests::_ONLY_ARROW (line 48)"
+            //
+            // The "macros/" prefix is optional, in case the user manually
+            // declared a workspace. That's why we ignore that prefix.
+            //
+            // We parse the files lazily here, because only few exercises
+            // contain doctests. Closure for error boundary.
+            (|| {
+                let mut words = name.split_ascii_whitespace();
+                let file_name = words.next()?.split('/').next_back()?;
+                let item_name = words.nth(1)?.split("::").last()?.trim_start_matches("_");
+                let line = words.nth(1)?.trim_end_matches(")").parse::<usize>().ok()? - 1;
+                if !doctest_cache.contains_key(file_name) {
+                    let mut line_to_code = HashMap::new();
+                    let content = std::fs::read_to_string(format!("src/{file_name}")).ok()?;
+                    let mut lines = content.lines().enumerate();
+                    'find_doctest: while let Some((i, line)) = lines.next() {
+                        if !line.starts_with("/// ```") {
+                            continue;
+                        }
+                        // doctest block start, gather code lines
+                        let mut code = String::new();
+                        for (_, line) in lines.by_ref() {
+                            if line.starts_with("/// ```") {
+                                // doctest block end
+                                code.pop(); // trim trailing newline
+                                line_to_code.insert(i, code);
+                                continue 'find_doctest;
+                            }
+                            code.push_str(line.trim_start_matches("/// "));
+                            code.push('\n');
+                        }
+                        // no end of code block found. very strange. ignore.
+                    }
+                    doctest_cache.insert(file_name.to_owned(), line_to_code);
+                }
+                let test_code = doctest_cache.get(file_name)?.get(&line)?;
+                Some((item_name.into(), test_code.into()))
+            })()
+            .unwrap_or_else(|| (name.clone(), TEST_CODE_NOT_FOUND_MSG.into()))
+        } else {
+            let test_code = name_to_code
+                .get(&name)
+                .map(String::as_str)
+                .unwrap_or(TEST_CODE_NOT_FOUND_MSG)
+                .to_string();
+            (name, test_code)
+        };
         match event.event {
             ct::EventKind::Started => continue,
             ct::EventKind::Ok => {
