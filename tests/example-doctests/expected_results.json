@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "status": "error",
-  "message": "test event misparse at idx 46: unknown variant `report`, expected `test` or `suite` at line 47 column 18",
+  "status": "pass",
+  "message": null,
   "tests": [
     {
       "name": "Empty",

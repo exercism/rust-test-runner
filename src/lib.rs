@@ -12,7 +12,7 @@ use output as o;
 /// convert a stream of test events into a single test result
 pub fn convert<I, E>(events: I, name_to_code: HashMap<String, String>) -> o::Output
 where
-    I: Iterator<Item = Result<ct::TestEvent, E>>,
+    I: Iterator<Item = Result<ct::Event, E>>,
     E: serde::de::Error + std::fmt::Display,
 {
     let mut out = o::Output {
@@ -23,16 +23,14 @@ where
     };
     for (idx, event) in events.enumerate() {
         let event = match event {
-            Ok(e) => e,
             Err(e) => {
                 out.status = o::Status::Error;
                 out.message = Some(format!("test event misparse at idx {}: {}", idx, e));
                 break;
             }
+            Ok(ct::Event::Test(e)) => e,
+            _ => continue, // ignore other events
         };
-        if event.etype != ct::EventType::Test {
-            continue;
-        }
         let name = match event.name {
             Some(n) => n,
             None => {
@@ -47,8 +45,8 @@ where
             .unwrap_or(TEST_CODE_NOT_FOUND_MSG)
             .to_string();
         match event.event {
-            ct::Event::Started => continue,
-            ct::Event::Ok => {
+            ct::EventKind::Started => continue,
+            ct::EventKind::Ok => {
                 // don't override failures with subsequent successes
                 if out.status == o::Status::Error {
                     out.status = o::Status::Pass;
@@ -56,13 +54,13 @@ where
                 out.message = None;
                 out.tests.push(o::TestResult::ok(name, test_code));
             }
-            ct::Event::Failed => {
+            ct::EventKind::Failed => {
                 out.status = o::Status::Fail;
                 out.message = None;
                 out.tests
                     .push(o::TestResult::fail(name, test_code, event.stdout));
             }
-            ct::Event::Ignored => {
+            ct::EventKind::Ignored => {
                 out.status = o::Status::Error;
                 out.message = Some(format!("test {} was ignored", name));
                 break;
@@ -98,7 +96,7 @@ mod test {
     #[test]
     fn test_convert() {
         let out = convert(
-            serde_json::Deserializer::from_str(TEST_DATA).into_iter::<ct::TestEvent>(),
+            serde_json::Deserializer::from_str(TEST_DATA).into_iter(),
             HashMap::new(),
         );
         assert_eq!(out.status, o::Status::Fail);
