@@ -67,13 +67,23 @@ where
                         // doctest block start, gather code lines
                         let mut code = String::new();
                         for (_, line) in lines.by_ref() {
-                            if line.starts_with("/// ```") {
+                            let Some(line) = line.strip_prefix("///") else {
+                                // doc comment ended before end of code block.
+                                // ignore this malformed doctest.
+                                continue 'find_doctest;
+                            };
+                            let Some(line) = line.strip_prefix(' ') else {
+                                // empty line inside code block.
+                                // skip, to keep test code short.
+                                continue;
+                            };
+                            if line.starts_with("```") {
                                 // doctest block end
                                 code.pop(); // trim trailing newline
                                 line_to_code.insert(i, code);
                                 continue 'find_doctest;
                             }
-                            code.push_str(line.trim_start_matches("/// "));
+                            code.push_str(line);
                             code.push('\n');
                         }
                         // no end of code block found. very strange. ignore.
