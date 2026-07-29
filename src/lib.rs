@@ -65,15 +65,37 @@ where
                             continue;
                         }
                         // doctest block start, gather code lines
-                        let mut code = String::new();
+                        let mut code = if line.contains("compile_fail") {
+                            // Doctests marked as "compile_fail" are otherwise
+                            // unmarked. Users could get confused by tests that
+                            // pass if their code doesn't even compile.
+                            String::from("// This code must not compile:\n")
+                        } else {
+                            String::new()
+                        };
                         for (_, line) in lines.by_ref() {
-                            if line.starts_with("/// ```") {
+                            let Some(line) = line.strip_prefix("///") else {
+                                // doc comment ended before end of code block.
+                                // ignore this malformed doctest.
+                                continue 'find_doctest;
+                            };
+                            let Some(line) = line.strip_prefix(' ') else {
+                                // empty line inside code block.
+                                // skip, to keep test code short.
+                                continue;
+                            };
+                            if line.starts_with('#') {
+                                // omit hidden lines, see:
+                                // https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html#hiding-portions-of-the-example
+                                continue;
+                            }
+                            if line.starts_with("```") {
                                 // doctest block end
                                 code.pop(); // trim trailing newline
                                 line_to_code.insert(i, code);
                                 continue 'find_doctest;
                             }
-                            code.push_str(line.trim_start_matches("/// "));
+                            code.push_str(line);
                             code.push('\n');
                         }
                         // no end of code block found. very strange. ignore.
