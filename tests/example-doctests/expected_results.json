@@ -4,8 +4,38 @@
   "message": null,
   "tests": [
     {
+      "name": "Comma separator",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// using only commas is invalid\nlet _hm: HashMap<_, _> = hashmap!('a', 1);",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Double trailing commas",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// a single trailing comma is okay, but two is not\nlet _hm: HashMap<_, _> = hashmap!('a' => 2, ,);",
+      "status": "pass",
+      "message": null
+    },
+    {
       "name": "Empty",
       "test_code": "let expected: HashMap<u32, u32> = HashMap::new();\nlet computed: HashMap<u32, u32> = hashmap!();\nassert_eq!(computed, expected);",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Leading comma",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// leading commas are not valid\nlet _hm: HashMap<_, _> = hashmap!(, 'a' => 2);",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Missing argument",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// an argument should come between each pair of commas\nlet _hm: HashMap<_, _> = hashmap!('a' => 1, , 'b' => 2);",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Missing comma",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// Key value pairs must be separated by commas\nlet _hm: HashMap<_, _> = hashmap!('a' => 1 'b' => 2);",
       "status": "pass",
       "message": null
     },
@@ -22,74 +52,26 @@
       "message": null
     },
     {
+      "name": "Only arrow",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// a single random arrow is not valid\nlet _hm: HashMap<(), ()> = hashmap!(=>);",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Only comma",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// a single random comma is not valid\nlet _hm: HashMap<(), ()> = hashmap!(,);",
+      "status": "pass",
+      "message": null
+    },
+    {
       "name": "Single",
       "test_code": "let mut expected = HashMap::new();\nexpected.insert(1, \"one\");\nassert_eq!(hashmap!(1 => \"one\"), expected);",
       "status": "pass",
       "message": null
     },
     {
-      "name": "Src/compile fail tests.rs - compile fail tests:: comma separator (line 3)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: double trailing commas (line 12)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: leading comma (line 66)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: missing argument (line 84)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: missing comma (line 75)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: only arrow (line 48)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: only comma (line 21)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: single argument (line 30)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: trailing arrow (line 57)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/compile fail tests.rs - compile fail tests:: triple arguments (line 39)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
-      "status": "pass",
-      "message": null
-    },
-    {
-      "name": "Src/lib.rs - whatever (line 24)",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
+      "name": "Single argument",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// a single argument is invalid\nlet _hm: HashMap<_, _> = hashmap!('a');",
       "status": "pass",
       "message": null
     },
@@ -106,14 +88,32 @@
       "message": null
     },
     {
+      "name": "Trailing arrow",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// a trailing => isn't valid either\nhashmap!('a' => 2, =>);",
+      "status": "pass",
+      "message": null
+    },
+    {
       "name": "Trailing comma",
       "test_code": "let mut expected = HashMap::new();\nexpected.insert('h', 89);\nexpected.insert('a', 1);\nexpected.insert('s', 19);\nexpected.insert('h', 8);\nassert_eq!(\n    hashmap!(\n        'h' => 89,\n        'a' => 1,\n        's' => 19,\n        'h' => 8,\n    ),\n    expected\n);",
       "status": "pass",
       "message": null
     },
     {
+      "name": "Triple arguments",
+      "test_code": "use macros::hashmap;\nuse std::collections::HashMap;\n///\n// three arguments are invalid\nhashmap!('a' => 1, 'b');",
+      "status": "pass",
+      "message": null
+    },
+    {
       "name": "Type override",
       "test_code": "// The macro should always use std::collections::HashMap and ignore crate::std::collections::HashMap\nmod std {\n    pub mod collections {\n        pub struct HashMap;\n\n        impl HashMap {\n            #[allow(dead_code)]\n            pub fn new() -> Self {\n                panic!(\"Do not allow users to override which HashMap is used\");\n            }\n\n            #[allow(dead_code)]\n            pub fn insert<K, V>(&mut self, _key: K, _val: V) {\n                panic!(\"Do not allow users to override which HashMap is used\");\n            }\n        }\n    }\n}\n\nlet _empty: ::std::collections::HashMap<(), ()> = hashmap!();\nlet _without_comma = hashmap!(1 => 2, 3 => 4);\nlet _with_trailing = hashmap!(1 => 2, 3 => 4,);",
+      "status": "pass",
+      "message": null
+    },
+    {
+      "name": "Whatever",
+      "test_code": "invalid rust syntax",
       "status": "pass",
       "message": null
     }
