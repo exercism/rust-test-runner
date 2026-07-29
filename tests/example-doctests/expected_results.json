@@ -77,13 +77,13 @@
     },
     {
       "name": "Test::macro out of scope",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
+      "test_code": "let _empty: ::std::collections::HashMap<(), ()> = macros::hashmap!();\nlet _without_comma = macros::hashmap!(23=> 623, 34 => 21);\nlet _with_trailing = macros::hashmap!(23 => 623, 34 => 21,);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Test::type not in scope",
-      "test_code": "It looks like the test runner failed to retrieve the code for this test. Please consider reporting this on the forum so we can try to fix it. Thanks!\n\nhttps://forum.exercism.org/c/exercism/bugs-and-features/126",
+      "test_code": "use macros::hashmap;\n\nlet _empty: ::std::collections::HashMap<(), ()> = hashmap!();\nlet _without_comma = hashmap!(23=> 623, 34 => 21);\nlet _with_trailing = hashmap!(23 => 623, 34 => 21,);",
       "status": "pass",
       "message": null
     },
