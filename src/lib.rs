@@ -84,6 +84,11 @@ where
                                 // skip, to keep test code short.
                                 continue;
                             };
+                            if line.starts_with('#') {
+                                // omit hidden lines, see:
+                                // https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html#hiding-portions-of-the-example
+                                continue;
+                            }
                             if line.starts_with("```") {
                                 // doctest block end
                                 code.pop(); // trim trailing newline

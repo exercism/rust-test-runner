@@ -5,13 +5,13 @@
   "tests": [
     {
       "name": "Comma separator",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// using only commas is invalid\nlet _hm: HashMap<_, _> = hashmap!('a', 1);",
+      "test_code": "// This code must not compile:\n// using only commas is invalid\nlet _hm: HashMap<_, _> = hashmap!('a', 1);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Double trailing commas",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// a single trailing comma is okay, but two is not\nlet _hm: HashMap<_, _> = hashmap!('a' => 2, ,);",
+      "test_code": "// This code must not compile:\n// a single trailing comma is okay, but two is not\nlet _hm: HashMap<_, _> = hashmap!('a' => 2, ,);",
       "status": "pass",
       "message": null
     },
@@ -23,19 +23,19 @@
     },
     {
       "name": "Leading comma",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// leading commas are not valid\nlet _hm: HashMap<_, _> = hashmap!(, 'a' => 2);",
+      "test_code": "// This code must not compile:\n// leading commas are not valid\nlet _hm: HashMap<_, _> = hashmap!(, 'a' => 2);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Missing argument",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// an argument should come between each pair of commas\nlet _hm: HashMap<_, _> = hashmap!('a' => 1, , 'b' => 2);",
+      "test_code": "// This code must not compile:\n// an argument should come between each pair of commas\nlet _hm: HashMap<_, _> = hashmap!('a' => 1, , 'b' => 2);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Missing comma",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// Key value pairs must be separated by commas\nlet _hm: HashMap<_, _> = hashmap!('a' => 1 'b' => 2);",
+      "test_code": "// This code must not compile:\n// Key value pairs must be separated by commas\nlet _hm: HashMap<_, _> = hashmap!('a' => 1 'b' => 2);",
       "status": "pass",
       "message": null
     },
@@ -53,13 +53,13 @@
     },
     {
       "name": "Only arrow",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// a single random arrow is not valid\nlet _hm: HashMap<(), ()> = hashmap!(=>);",
+      "test_code": "// This code must not compile:\n// a single random arrow is not valid\nlet _hm: HashMap<(), ()> = hashmap!(=>);",
       "status": "pass",
       "message": null
     },
     {
       "name": "Only comma",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// a single random comma is not valid\nlet _hm: HashMap<(), ()> = hashmap!(,);",
+      "test_code": "// This code must not compile:\n// a single random comma is not valid\nlet _hm: HashMap<(), ()> = hashmap!(,);",
       "status": "pass",
       "message": null
     },
@@ -71,7 +71,7 @@
     },
     {
       "name": "Single argument",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// a single argument is invalid\nlet _hm: HashMap<_, _> = hashmap!('a');",
+      "test_code": "// This code must not compile:\n// a single argument is invalid\nlet _hm: HashMap<_, _> = hashmap!('a');",
       "status": "pass",
       "message": null
     },
@@ -89,7 +89,7 @@
     },
     {
       "name": "Trailing arrow",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// a trailing => isn't valid either\nhashmap!('a' => 2, =>);",
+      "test_code": "// This code must not compile:\n// a trailing => isn't valid either\nhashmap!('a' => 2, =>);",
       "status": "pass",
       "message": null
     },
@@ -101,7 +101,7 @@
     },
     {
       "name": "Triple arguments",
-      "test_code": "// This code must not compile:\nuse macros::hashmap;\nuse std::collections::HashMap;\n// three arguments are invalid\nhashmap!('a' => 1, 'b');",
+      "test_code": "// This code must not compile:\n// three arguments are invalid\nhashmap!('a' => 1, 'b');",
       "status": "pass",
       "message": null
     },
