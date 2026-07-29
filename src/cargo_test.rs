@@ -1,15 +1,16 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-pub enum EventType {
-    Test,
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase", tag = "type")]
+pub enum Event {
+    Test(TestEvent),
     Suite,
+    Report,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
-pub enum Event {
+pub enum EventKind {
     Started,
     Ok,
     Ignored,
@@ -18,9 +19,7 @@ pub enum Event {
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TestEvent {
-    #[serde(rename = "type")]
-    pub etype: EventType,
-    pub event: Event,
+    pub event: EventKind,
     pub name: Option<String>,
     pub stdout: Option<String>,
     pub passed: Option<u32>,
