@@ -3,10 +3,20 @@ use std::collections::HashMap;
 pub fn parse_file(test_file: &str) -> HashMap<String, String> {
     let mut name_to_code = HashMap::new();
     let mut lines = test_file.lines();
+    let mut module = None;
     while let Some(line) = lines.by_ref().next() {
         if line.contains("#[test]") {
-            let (name, code) = parse_function(&mut lines);
+            let (mut name, code) = parse_function(&mut lines);
+            if let Some(m) = module {
+                name = format!("{m}::{name}");
+            }
             name_to_code.insert(name, code);
+        }
+        if let Some(rest) = line.strip_prefix("mod ") {
+            module = Some(rest.split(' ').next().unwrap_or_default())
+        }
+        if module.is_some() && line.starts_with('}') {
+            module = None;
         }
     }
     name_to_code
