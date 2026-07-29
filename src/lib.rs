@@ -65,7 +65,14 @@ where
                             continue;
                         }
                         // doctest block start, gather code lines
-                        let mut code = String::new();
+                        let mut code = if line.contains("compile_fail") {
+                            // Doctests marked as "compile_fail" are otherwise
+                            // unmarked. Users could get confused by tests that
+                            // pass if their code doesn't even compile.
+                            String::from("// This code must not compile:\n")
+                        } else {
+                            String::new()
+                        };
                         for (_, line) in lines.by_ref() {
                             let Some(line) = line.strip_prefix("///") else {
                                 // doc comment ended before end of code block.
