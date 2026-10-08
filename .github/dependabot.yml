@@ -3,13 +3,19 @@
 version: 2
 
 updates:
-  - package-ecosystem: 'cargo'
-    directory: '/local-registry'
+  - package-ecosystem: cargo
+    directory: /local-registry
     schedule:
-      interval: 'monthly'
+      interval: monthly
     groups:
       all:
         patterns:
-         - "*"
+         - *
     labels:
-      - 'x:rep/tiny'
+      - x:rep/tiny
+
+  # Enable updates to the dependencies of our Dockerfile
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: monthly
