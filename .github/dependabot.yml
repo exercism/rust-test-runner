@@ -10,7 +10,7 @@ updates:
     groups:
       all:
         patterns:
-         - *
+         - "*"
     labels:
       - x:rep/tiny
 
