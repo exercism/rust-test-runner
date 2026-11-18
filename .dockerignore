@@ -11,3 +11,7 @@ results.json
 results.out
 /.vscode/
 tests/
+# The image build runs these two golden tests to record what a run reads
+# from disk (see src/prefetch.rs).
+!tests/example-success/
+!tests/example-doctests/

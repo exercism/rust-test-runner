@@ -5,10 +5,14 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use regex::Regex;
 use rust_test_runner::cli::CliArgs;
-use rust_test_runner::{convert, dep_cache, parse_test_code};
+use rust_test_runner::{convert, dep_cache, parse_test_code, prefetch};
 use serde_json as json;
 
 fn main() -> Result<()> {
+    // Start loading the toolchain into memory first, so the disk reads overlap
+    // with everything else (see src/prefetch.rs).
+    prefetch::start(Path::new(prefetch::LIST_PATH));
+
     let cli_args = CliArgs::parse();
     let input_dir = cli_args
         .input_dir

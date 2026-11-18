@@ -3,6 +3,7 @@ pub mod cli;
 pub mod dep_cache;
 pub mod output;
 pub mod parse_test_code;
+pub mod prefetch;
 pub mod test_name_formatter;
 
 use std::collections::HashMap;

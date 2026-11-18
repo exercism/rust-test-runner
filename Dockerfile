@@ -60,7 +60,7 @@ cargo build --release
 rm src/lib.rs
 EOF
 # now build the real test-runner
-COPY src/* src/
+COPY src/ src/
 RUN touch src/lib.rs && cargo build --release
 
 
@@ -77,5 +77,20 @@ COPY bin/run.sh bin/
 RUN --mount=type=bind,source=prebuilt-deps,target=/tmp/prebuilt-deps \
     --mount=type=bind,source=bin/build-dep-cache.sh,target=/tmp/build-dep-cache.sh \
     /tmp/build-dep-cache.sh /tmp/prebuilt-deps /opt/test-runner/dep-cache
+
+# Record which parts of the toolchain a run reads, so that each run can start
+# loading them from disk in the background (see src/prefetch.rs). The sample
+# exercises are two of the golden tests: a plain one, and one with doctests,
+# which also runs rustdoc.
+RUN --mount=type=bind,source=tests,target=/tmp/golden-tests \
+    --mount=type=bind,from=build,source=/work/target/release/record_prefetch,target=/tmp/record_prefetch <<EOF
+set -eux
+cp -r /tmp/golden-tests/example-success /tmp/train-leap
+cp -r /tmp/golden-tests/example-doctests /tmp/train-macros
+/tmp/record_prefetch /opt/test-runner/prefetch.txt \
+    /usr/local/rustup /usr/local/cargo /usr/bin /usr/lib /usr/libexec /opt/test-runner -- \
+    sh -c "bin/run.sh leap /tmp/train-leap && bin/run.sh macros /tmp/train-macros"
+rm -rf /tmp/train-leap /tmp/train-macros
+EOF
 
 ENTRYPOINT ["bin/run.sh"]
