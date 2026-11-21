@@ -5,7 +5,7 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use regex::Regex;
 use rust_test_runner::cli::CliArgs;
-use rust_test_runner::{convert, parse_test_code};
+use rust_test_runner::{convert, dep_cache, parse_test_code};
 use serde_json as json;
 
 fn main() -> Result<()> {
@@ -38,6 +38,11 @@ fn main() -> Result<()> {
 
     let profile = determine_profile(&input_dir)
         .context("failed to determine the compilation profile of the solution")?;
+
+    if profile == "dev" {
+        let manifest = std::fs::read_to_string("Cargo.toml").unwrap_or_default();
+        dep_cache::link(&manifest, Path::new("target"));
+    }
 
     #[rustfmt::skip]
     let cargo_output = Command::new("timeout")

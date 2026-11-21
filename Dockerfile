@@ -71,4 +71,11 @@ RUN apt-get update && apt-get install -y jq && rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/test-runner
 COPY --from=build /work/target/release/rust_test_runner bin/
 COPY bin/run.sh bin/
+
+# Compile the crates used by the track's exercises, so that runs only compile
+# the solution and its tests (see bin/build-dep-cache.sh).
+RUN --mount=type=bind,source=prebuilt-deps,target=/tmp/prebuilt-deps \
+    --mount=type=bind,source=bin/build-dep-cache.sh,target=/tmp/build-dep-cache.sh \
+    /tmp/build-dep-cache.sh /tmp/prebuilt-deps /opt/test-runner/dep-cache
+
 ENTRYPOINT ["bin/run.sh"]

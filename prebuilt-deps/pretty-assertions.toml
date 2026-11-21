@@ -1,0 +1,3 @@
+# bottle-song and pov (the exercises' Cargo.toml)
+[dev-dependencies]
+pretty_assertions = "*"

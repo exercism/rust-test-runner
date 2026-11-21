@@ -1,0 +1,4 @@
+# resistor-color (the exercise's Cargo.toml)
+[dependencies]
+enum-iterator = "2.0"
+int-enum = "1.0"

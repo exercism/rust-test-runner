@@ -1,0 +1,4 @@
+# grep (the example solution's Cargo.toml)
+[dependencies]
+anyhow = "1.0"
+thiserror = "2.0"

@@ -1,5 +1,6 @@
 pub mod cargo_test;
 pub mod cli;
+pub mod dep_cache;
 pub mod output;
 pub mod parse_test_code;
 pub mod test_name_formatter;

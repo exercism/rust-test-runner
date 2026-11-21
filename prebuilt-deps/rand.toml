@@ -1,0 +1,3 @@
+# robot-name and simple-cipher (the exercises' Cargo.toml), and diffie-hellman (the example solution's)
+[dependencies]
+rand = "0.10"

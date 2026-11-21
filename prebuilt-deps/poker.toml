@@ -1,0 +1,3 @@
+# poker (the example solution's Cargo.toml)
+[dependencies]
+counter = "0.7.0"
